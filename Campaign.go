@@ -8,6 +8,7 @@ import (
 
 	errortools "github.com/leapforce-libraries/go_errortools"
 	go_http "github.com/leapforce-libraries/go_http"
+	go_types "github.com/leapforce-libraries/go_types"
 )
 
 type CampaignResponse struct {
@@ -16,43 +17,43 @@ type CampaignResponse struct {
 }
 
 type Campaign struct {
-	ID                       string          `json:"id"`
-	AccountID                *string         `json:"account_id"`
-	AdStrategyID             *string         `json:"ad_strategy_id"`
-	AdLabels                 json.RawMessage `json:"adlabels"`
-	BidStrategy              *string         `json:"bid_strategy"`
-	BoostedObjectID          *string         `json:"boosted_object_id"`
-	BrandLiftStudies         json.RawMessage `json:"brand_lift_studies"`
-	BudgetRebalanceFlag      *bool           `json:"budget_rebalance_flag"`
-	BudgetRemaining          *string         `json:"budget_remaining"`
-	BuyingType               *string         `json:"buying_type"`
-	CanCreateBrandLiftStudy  *bool           `json:"can_create_brand_lift_study"`
-	CanUseSpendCap           *bool           `json:"can_use_spend_cap"`
-	ConfiguredStatus         *string         `json:"configured_status"`
-	CreatedTime              *string         `json:"created_time"`
-	DailyBudget              *string         `json:"daily_budget"`
-	EffectiveStatus          *string         `json:"effective_status"`
-	IsSKAdNetworkAttribution *bool           `json:"is_skadnetwork_attribution"`
-	IssuesInfo               json.RawMessage `json:"issues_info"`
-	LastBudgetTogglingTime   *string         `json:"last_budget_toggling_time"`
-	LifetimeBudget           *string         `json:"lifetime_budget"`
-	Name                     *string         `json:"name"`
-	Objective                *string         `json:"objective"`
-	PacingType               *[]string       `json:"pacing_type"`
-	PromotedObject           json.RawMessage `json:"promoted_object"`
-	Recommendations          json.RawMessage `json:"recommendations"`
-	SmartPromotionType       *string         `json:"smart_promotion_type"`
-	SourceCampaign           *Campaign       `json:"source_campaign"`
-	SourceCampaignID         *string         `json:"source_campaign_id"`
-	SpecialAdCategories      *[]string       `json:"special_ad_categories"`
-	SpecialAdCategory        *string         `json:"special_ad_category"`
-	SpecialAdCategoryCountry *[]string       `json:"special_ad_category_country"`
-	SpendCap                 *string         `json:"spend_cap"`
-	StartTime                *string         `json:"start_time"`
-	Status                   *string         `json:"status"`
-	StopTime                 *string         `json:"stop_time"`
-	ToplineID                *string         `json:"topline_id"`
-	UpdatedTime              *string         `json:"updated_time"`
+	ID                       string                `json:"id"`
+	AccountID                *go_types.Int64String `json:"account_id"`
+	AdStrategyID             *go_types.Int64String `json:"ad_strategy_id"`
+	AdLabels                 json.RawMessage       `json:"adlabels"`
+	BidStrategy              *string               `json:"bid_strategy"`
+	BoostedObjectID          *go_types.Int64String `json:"boosted_object_id"`
+	BrandLiftStudies         json.RawMessage       `json:"brand_lift_studies"`
+	BudgetRebalanceFlag      *bool                 `json:"budget_rebalance_flag"`
+	BudgetRemaining          *go_types.Int64String `json:"budget_remaining"`
+	BuyingType               *string               `json:"buying_type"`
+	CanCreateBrandLiftStudy  *bool                 `json:"can_create_brand_lift_study"`
+	CanUseSpendCap           *bool                 `json:"can_use_spend_cap"`
+	ConfiguredStatus         *string               `json:"configured_status"`
+	CreatedTime              *DateTimeString       `json:"created_time"`
+	DailyBudget              *go_types.Int64String `json:"daily_budget"`
+	EffectiveStatus          *string               `json:"effective_status"`
+	IsSKAdNetworkAttribution *bool                 `json:"is_skadnetwork_attribution"`
+	IssuesInfo               json.RawMessage       `json:"issues_info"`
+	LastBudgetTogglingTime   *DateTimeString       `json:"last_budget_toggling_time"`
+	LifetimeBudget           *go_types.Int64String `json:"lifetime_budget"`
+	Name                     *string               `json:"name"`
+	Objective                *string               `json:"objective"`
+	PacingType               *[]string             `json:"pacing_type"`
+	PromotedObject           json.RawMessage       `json:"promoted_object"`
+	Recommendations          json.RawMessage       `json:"recommendations"`
+	SmartPromotionType       *string               `json:"smart_promotion_type"`
+	SourceCampaign           *Campaign             `json:"source_campaign"`
+	SourceCampaignID         *go_types.Int64String `json:"source_campaign_id"`
+	SpecialAdCategories      *[]string             `json:"special_ad_categories"`
+	SpecialAdCategory        *string               `json:"special_ad_category"`
+	SpecialAdCategoryCountry *[]string             `json:"special_ad_category_country"`
+	SpendCap                 *go_types.Int64String `json:"spend_cap"`
+	StartTime                *DateTimeString       `json:"start_time"`
+	Status                   *string               `json:"status"`
+	StopTime                 *DateTimeString       `json:"stop_time"`
+	ToplineID                *go_types.Int64String `json:"topline_id"`
+	UpdatedTime              *DateTimeString       `json:"updated_time"`
 }
 
 type CampaignField string
