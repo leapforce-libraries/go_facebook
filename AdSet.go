@@ -17,7 +17,7 @@ type AdSetResponse struct {
 }
 
 type AdSet struct {
-	ID                            string                  `json:"id"`
+	ID                            go_types.Int64String    `json:"id"`
 	AccountID                     *go_types.Int64String   `json:"account_id"`
 	AdLabels                      json.RawMessage         `json:"adlabels"`
 	AdSetSchedule                 json.RawMessage         `json:"adset_schedule"`
@@ -65,7 +65,7 @@ type AdSet struct {
 	SourceAdSetID                 *go_types.Int64String   `json:"source_adset_id"`
 	StartTime                     *DateTimeString         `json:"start_time"`
 	Status                        *string                 `json:"status"`
-	Targeting                     *json.RawMessage        `json:"targeting"`
+	Targeting                     json.RawMessage         `json:"targeting"`
 	TimeBasedAdRotationIDBlocks   *[][]int                `json:"time_based_ad_rotation_id_blocks"`
 	TimeBasedAdRotationIntervals  *[]uint32               `json:"time_based_ad_rotation_intervals"`
 	UpdatedTime                   *DateTimeString         `json:"updated_time"`

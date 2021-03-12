@@ -11,7 +11,7 @@ type DateTimeString time.Time
 func (d *DateTimeString) UnmarshalJSON(b []byte) error {
 	unquoted, err := strconv.Unquote(string(b))
 	if err != nil {
-		return nil
+		return err
 	}
 
 	if strings.Trim(unquoted, " ") == "" {
@@ -28,7 +28,7 @@ func (d *DateTimeString) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-func (d *DateTimeString) Value() *time.Time {
+func (d *DateTimeString) ValuePtr() *time.Time {
 	if d == nil {
 		return nil
 	}

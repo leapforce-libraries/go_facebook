@@ -200,6 +200,10 @@ github.com/leapforce-libraries/go_types v0.0.0-20210311131100-10e94be1c273 h1:uH
 github.com/leapforce-libraries/go_types v0.0.0-20210311131100-10e94be1c273/go.mod h1:dM2wpUVXfTFAuEBZG+878JIQtr/QraSb0mpGkLYt1Qw=
 github.com/leapforce-libraries/go_types v0.0.0-20210311132531-9dc46bb6cca5 h1:Wycv/x/nG3XEOAzjjnHTTGgeKebsDzVEDgxqRkm3ET4=
 github.com/leapforce-libraries/go_types v0.0.0-20210311132531-9dc46bb6cca5/go.mod h1:dM2wpUVXfTFAuEBZG+878JIQtr/QraSb0mpGkLYt1Qw=
+github.com/leapforce-libraries/go_types v0.0.0-20210312095558-498314a86c5a h1:FIvfDzmR0rR+9+O76l25CIsczADQamQuRP+n6U3D8pk=
+github.com/leapforce-libraries/go_types v0.0.0-20210312095558-498314a86c5a/go.mod h1:dM2wpUVXfTFAuEBZG+878JIQtr/QraSb0mpGkLYt1Qw=
+github.com/leapforce-libraries/go_types v0.0.0-20210312100820-262eb2dfc4a1 h1:itCjNoT/eoBkpfxm870qSCJNRPaEG+mZtKm6C8wgPos=
+github.com/leapforce-libraries/go_types v0.0.0-20210312100820-262eb2dfc4a1/go.mod h1:dM2wpUVXfTFAuEBZG+878JIQtr/QraSb0mpGkLYt1Qw=
 github.com/leapforce-libraries/go_utilities v0.0.0-20210308200306-ede05f895e30 h1:5CWdYJMh0Gxebtdznw2LvYr9dphqj1NxH52/YEsUFA0=
 github.com/leapforce-libraries/go_utilities v0.0.0-20210308200306-ede05f895e30/go.mod h1:fp9gPd4WpZ62d3/5l+NU6H1XgqpigCGMxLKxFO61vEA=
 github.com/magiconair/properties v1.8.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=

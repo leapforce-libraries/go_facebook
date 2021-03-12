@@ -35,7 +35,7 @@ func (a *AccountStatus) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-func (a *AccountStatus) Value() *string {
+func (a *AccountStatus) ValuePtr() *string {
 	if a == nil {
 		return nil
 	}

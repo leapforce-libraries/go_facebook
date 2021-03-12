@@ -17,7 +17,7 @@ type CampaignResponse struct {
 }
 
 type Campaign struct {
-	ID                       string                `json:"id"`
+	ID                       go_types.Int64String  `json:"id"`
 	AccountID                *go_types.Int64String `json:"account_id"`
 	AdStrategyID             *go_types.Int64String `json:"ad_strategy_id"`
 	AdLabels                 json.RawMessage       `json:"adlabels"`

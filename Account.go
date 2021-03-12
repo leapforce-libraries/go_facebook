@@ -12,7 +12,7 @@ import (
 )
 
 type Account struct {
-	ID                                string                `json:"id"`
+	ID                                AccountID             `json:"id"`
 	AccountID                         *go_types.Int64String `json:"account_id"`
 	AccountStatus                     *AccountStatus        `json:"account_status"`
 	AdAccountPromotableObjects        json.RawMessage       `json:"ad_account_promotable_objects"`
