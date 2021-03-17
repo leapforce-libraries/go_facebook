@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-type DateTimeString time.Time
+type DateString time.Time
 
-func (d *DateTimeString) UnmarshalJSON(b []byte) error {
+func (d *DateString) UnmarshalJSON(b []byte) error {
 	unquoted, err := strconv.Unquote(string(b))
 	if err != nil {
 		return err
@@ -19,16 +19,16 @@ func (d *DateTimeString) UnmarshalJSON(b []byte) error {
 		return nil
 	}
 
-	_t, err := time.Parse(DateTimeFormat, unquoted)
+	_t, err := time.Parse(DateFormat, unquoted)
 	if err != nil {
 		return err
 	}
 
-	*d = DateTimeString(_t)
+	*d = DateString(_t)
 	return nil
 }
 
-func (d *DateTimeString) ValuePtr() *time.Time {
+func (d *DateString) ValuePtr() *time.Time {
 	if d == nil {
 		return nil
 	}
