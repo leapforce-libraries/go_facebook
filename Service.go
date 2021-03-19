@@ -9,9 +9,7 @@ import (
 )
 
 const (
-	apiURL         string = "https://graph.facebook.com/v10.0"
-	DateTimeFormat string = "2006-01-02T15:04:05-0700"
-	DateFormat     string = "2006-01-02"
+	apiURL string = "https://graph.facebook.com/v10.0"
 )
 
 // Service stores Service configuration

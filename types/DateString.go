@@ -4,9 +4,15 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"cloud.google.com/go/civil"
 )
 
-type DateString time.Time
+const (
+	DateFormat string = "2006-01-02"
+)
+
+type DateString civil.Date
 
 func (d *DateString) UnmarshalJSON(b []byte) error {
 	unquoted, err := strconv.Unquote(string(b))
@@ -24,15 +30,19 @@ func (d *DateString) UnmarshalJSON(b []byte) error {
 		return err
 	}
 
-	*d = DateString(_t)
+	*d = DateString(civil.DateOf(_t))
 	return nil
 }
 
-func (d *DateString) ValuePtr() *time.Time {
+func (d *DateString) ValuePtr() *civil.Date {
 	if d == nil {
 		return nil
 	}
 
-	_d := time.Time(*d)
+	_d := civil.Date(*d)
 	return &_d
+}
+
+func (d DateString) Value() civil.Date {
+	return civil.Date(d)
 }

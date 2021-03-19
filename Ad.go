@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
+	f_types "github.com/leapforce-libraries/go_facebook/types"
 	go_http "github.com/leapforce-libraries/go_http"
 	go_types "github.com/leapforce-libraries/go_types"
 )
@@ -17,30 +18,30 @@ type AdResponse struct {
 }
 
 type Ad struct {
-	ID                   go_types.Int64String  `json:"id"`
-	AccountID            *go_types.Int64String `json:"account_id"`
-	AdReviewFeedback     json.RawMessage       `json:"ad_review_feedback"`
-	AdLabels             json.RawMessage       `json:"adlabels"`
-	AdSet                *AdSet                `json:"adset"`
-	AdSetID              *go_types.Int64String `json:"adset_id"`
-	BidAmount            *uint32               `json:"bid_amount"`
-	Campaign             *Campaign             `json:"campaign"`
-	CampaignID           *go_types.Int64String `json:"campaign_id"`
-	ConfiguredStatus     *string               `json:"configured_status"`
-	ConversionDomain     json.RawMessage       `json:"conversion_domain"`
-	CreatedTime          *DateTimeString       `json:"created_time"`
-	Creative             *Creative             `json:"creative"`
-	EffectiveStatus      *string               `json:"effective_status"`
-	IssuesInfo           json.RawMessage       `json:"issues_info"`
-	LastUpdatedByAppID   *int32                `json:"last_updated_by_app_id"`
-	Name                 *string               `json:"name"`
-	PreviewShareableLink *string               `json:"preview_shareable_link"`
-	Recommendations      json.RawMessage       `json:"recommendations"`
-	SourceAd             *Ad                   `json:"source_ad"`
-	SourceAdID           *go_types.Int64String `json:"source_ad_id"`
-	Status               *string               `json:"status"`
-	TrackingSpecs        json.RawMessage       `json:"tracking_specs"`
-	UpdatedTime          *DateTimeString       `json:"updated_time"`
+	ID                   go_types.Int64String    `json:"id"`
+	AccountID            *go_types.Int64String   `json:"account_id"`
+	AdReviewFeedback     json.RawMessage         `json:"ad_review_feedback"`
+	AdLabels             json.RawMessage         `json:"adlabels"`
+	AdSet                *AdSet                  `json:"adset"`
+	AdSetID              *go_types.Int64String   `json:"adset_id"`
+	BidAmount            *uint32                 `json:"bid_amount"`
+	Campaign             *Campaign               `json:"campaign"`
+	CampaignID           *go_types.Int64String   `json:"campaign_id"`
+	ConfiguredStatus     *string                 `json:"configured_status"`
+	ConversionDomain     json.RawMessage         `json:"conversion_domain"`
+	CreatedTime          *f_types.DateTimeString `json:"created_time"`
+	Creative             *Creative               `json:"creative"`
+	EffectiveStatus      *string                 `json:"effective_status"`
+	IssuesInfo           json.RawMessage         `json:"issues_info"`
+	LastUpdatedByAppID   *int32                  `json:"last_updated_by_app_id"`
+	Name                 *string                 `json:"name"`
+	PreviewShareableLink *string                 `json:"preview_shareable_link"`
+	Recommendations      json.RawMessage         `json:"recommendations"`
+	SourceAd             *Ad                     `json:"source_ad"`
+	SourceAdID           *go_types.Int64String   `json:"source_ad_id"`
+	Status               *string                 `json:"status"`
+	TrackingSpecs        json.RawMessage         `json:"tracking_specs"`
+	UpdatedTime          *f_types.DateTimeString `json:"updated_time"`
 }
 
 type AdField string

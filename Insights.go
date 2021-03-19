@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
+	f_types "github.com/leapforce-libraries/go_facebook/types"
 	go_http "github.com/leapforce-libraries/go_http"
 	go_types "github.com/leapforce-libraries/go_types"
 )
@@ -75,8 +76,8 @@ type Insights struct {
 	CPP                                       *go_types.Float64String `json:"cpp"`
 	CreatedTime                               *string                 `json:"created_time"`
 	CTR                                       *go_types.Float64String `json:"ctr"`
-	DateStart                                 *DateString             `json:"date_start"`
-	DateStop                                  *DateString             `json:"date_stop"`
+	DateStart                                 f_types.DateString      `json:"date_start"`
+	DateStop                                  f_types.DateString      `json:"date_stop"`
 	DDACountByConvs                           *go_types.Float64String `json:"dda_countby_convs"`
 	DescriptionAsset                          json.RawMessage         `json:"description_asset"`
 	DevicePlatform                            *string                 `json:"device_platform"`
@@ -322,10 +323,46 @@ const (
 	DatePresetThisYear         DatePreset = "this_year"
 )
 
+type Breakdown string
+
+const (
+	BreakdownAdFormatAsset                             Breakdown = "ad_format_asset"
+	BreakdownAge                                       Breakdown = "age"
+	BreakdownBodyAsset                                 Breakdown = "body_asset"
+	BreakdownCallToActionAsset                         Breakdown = "call_to_action_asset"
+	BreakdownCountry                                   Breakdown = "country"
+	BreakdownDescriptionAsset                          Breakdown = "description_asset"
+	BreakdownGender                                    Breakdown = "gender"
+	BreakdownImageAsset                                Breakdown = "image_asset"
+	BreakdownLinkURLAsset                              Breakdown = "link_url_asset"
+	BreakdownProductID                                 Breakdown = "product_id"
+	BreakdownRegion                                    Breakdown = "region"
+	BreakdownTitleAsset                                Breakdown = "title_asset"
+	BreakdownVideoAsset                                Breakdown = "video_asset"
+	BreakdownDMA                                       Breakdown = "dma"
+	BreakdownFrequencyValue                            Breakdown = "frequency_value"
+	BreakdownHourlyStatsAggregatedByAdvertiserTimeZone Breakdown = "hourly_stats_aggregated_by_advertiser_time_zone"
+	BreakdownHourlyStatsAggregatedByAudienceTimeZone   Breakdown = "hourly_stats_aggregated_by_audience_time_zone"
+	BreakdownPlacePageID                               Breakdown = "place_page_id"
+	BreakdownPublisherPlatform                         Breakdown = "publisher_platform"
+	BreakdownPlatformPosition                          Breakdown = "platform_position"
+	BreakdownDevicePlatform                            Breakdown = "device_platform"
+)
+
+type TimeIncrement string
+
+const (
+	TimeIncrementMonthly TimeIncrement = "monthly"
+	TimeIncrementAllDays TimeIncrement = "all_days"
+)
+
 type GetInsightsConfig struct {
-	ID         int64
-	DatePreset *DatePreset
-	Fields     []InsightsField
+	ID                int64
+	Breakdowns        *[]Breakdown
+	DatePreset        *DatePreset
+	Fields            []InsightsField
+	TimeIncrement     *TimeIncrement
+	TimeIncrementDays *uint // 1 to 90
 }
 
 func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *errortools.Error) {
@@ -336,6 +373,15 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 	values := url.Values{}
 	fields := []string{}
 
+	if config.Breakdowns != nil {
+		if len(*config.Breakdowns) > 0 {
+			_breakdowns := []string{}
+			for _, breakdown := range *config.Breakdowns {
+				_breakdowns = append(_breakdowns, string(breakdown))
+			}
+			values.Set("breakdowns", strings.Join(_breakdowns, ","))
+		}
+	}
 	if config.DatePreset != nil {
 		values.Set("date_preset", string(*config.DatePreset))
 	}
@@ -346,6 +392,18 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 			fields = append(fields, string(field))
 		}
 	}
+	if config.TimeIncrement != nil && config.TimeIncrementDays != nil {
+		return nil, errortools.ErrorMessage("Do not supply TimeIncrement and TimeIncrementDays at the same time")
+	}
+	if config.TimeIncrement != nil {
+		values.Set("time_increment", string(*config.TimeIncrement))
+	} else if config.TimeIncrementDays != nil {
+		if *config.TimeIncrementDays < 1 || *config.TimeIncrementDays > 90 {
+			return nil, errortools.ErrorMessage("TimeIncrementDays must be a number between 1 and 90")
+		}
+		values.Set("time_increment", fmt.Sprintf("%v", *config.TimeIncrementDays))
+	}
+
 	values.Set("fields", strings.Join(fields, ","))
 
 	adInsights := []Insights{}
@@ -358,6 +416,7 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 			URL:           url,
 			ResponseModel: &adInsightsResponse,
 		}
+		fmt.Println(url)
 		_, _, e := service.get(&requestConfig)
 		if e != nil {
 			return nil, e

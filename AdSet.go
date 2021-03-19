@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
+	f_types "github.com/leapforce-libraries/go_facebook/types"
 	go_http "github.com/leapforce-libraries/go_http"
 	go_types "github.com/leapforce-libraries/go_types"
 )
@@ -34,14 +35,14 @@ type AdSet struct {
 	CampaignID                    *go_types.Int64String   `json:"campaign_id"`
 	ConfiguredStatus              *string                 `json:"configured_status"`
 	ContextualBundlingSpec        json.RawMessage         `json:"contextual_bundling_spec"`
-	CreatedTime                   *DateTimeString         `json:"created_time"`
+	CreatedTime                   *f_types.DateTimeString `json:"created_time"`
 	CreativeSequence              *[]go_types.Int64String `json:"creative_sequence"`
 	DailyBudget                   *go_types.Int64String   `json:"daily_budget"`
 	DailyMinSpendTarget           *go_types.Int64String   `json:"daily_min_spend_target"`
 	DailySpendCap                 *go_types.Int64String   `json:"daily_spend_cap"`
 	DestinationType               *string                 `json:"destination_type"`
 	EffectiveStatus               *string                 `json:"effective_status"`
-	EndTime                       *DateTimeString         `json:"end_time"`
+	EndTime                       *f_types.DateTimeString `json:"end_time"`
 	FrequencyControlSpecs         json.RawMessage         `json:"frequency_control_specs"`
 	InstagramActorID              *go_types.Int64String   `json:"instagram_actor_id"`
 	IsDynamicCreative             *bool                   `json:"is_dynamic_creative"`
@@ -63,12 +64,12 @@ type AdSet struct {
 	ReachAndFrequencyPredictionID *int                    `json:"rf_prediction_id"`
 	SourceAdSet                   *AdSet                  `json:"source_adset"`
 	SourceAdSetID                 *go_types.Int64String   `json:"source_adset_id"`
-	StartTime                     *DateTimeString         `json:"start_time"`
+	StartTime                     *f_types.DateTimeString `json:"start_time"`
 	Status                        *string                 `json:"status"`
 	Targeting                     json.RawMessage         `json:"targeting"`
 	TimeBasedAdRotationIDBlocks   *[][]int                `json:"time_based_ad_rotation_id_blocks"`
 	TimeBasedAdRotationIntervals  *[]uint32               `json:"time_based_ad_rotation_intervals"`
-	UpdatedTime                   *DateTimeString         `json:"updated_time"`
+	UpdatedTime                   *f_types.DateTimeString `json:"updated_time"`
 	UseNewAppClick                *bool                   `json:"use_new_app_click"`
 }
 

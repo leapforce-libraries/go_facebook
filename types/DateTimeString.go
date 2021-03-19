@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+const (
+	DateTimeFormat string = "2006-01-02T15:04:05-0700"
+)
+
 type DateTimeString time.Time
 
 func (d *DateTimeString) UnmarshalJSON(b []byte) error {
