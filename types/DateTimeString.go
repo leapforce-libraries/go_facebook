@@ -40,3 +40,7 @@ func (d *DateTimeString) ValuePtr() *time.Time {
 	_d := time.Time(*d)
 	return &_d
 }
+
+func (d DateTimeString) Value() time.Time {
+	return time.Time(d)
+}

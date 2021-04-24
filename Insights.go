@@ -416,7 +416,6 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 			URL:           url,
 			ResponseModel: &adInsightsResponse,
 		}
-		fmt.Println(url)
 		_, _, e := service.get(&requestConfig)
 		if e != nil {
 			return nil, e
