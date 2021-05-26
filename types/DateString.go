@@ -1,31 +1,44 @@
 package facebook
 
 import (
-	"strconv"
-	"strings"
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"cloud.google.com/go/civil"
+	errortools "github.com/leapforce-libraries/go_errortools"
 )
 
 const (
-	DateFormat string = "2006-01-02"
+	layout string = "2006-01-02"
 )
 
 type DateString civil.Date
 
 func (d *DateString) UnmarshalJSON(b []byte) error {
-	unquoted, err := strconv.Unquote(string(b))
-	if err != nil {
-		return err
+
+	var returnError = func() error {
+		errortools.CaptureError(fmt.Sprintf("Cannot parse '%s' to DateString", string(b)))
+		return nil
 	}
 
-	if strings.Trim(unquoted, " ") == "" {
+	var s string
+
+	err := json.Unmarshal(b, &s)
+	if err != nil {
+		return returnError()
+	}
+
+	if len(s) != len(layout) {
+		return returnError()
+	}
+
+	if s == "" || s == "0000-00-00" {
 		d = nil
 		return nil
 	}
 
-	_t, err := time.Parse(DateFormat, unquoted)
+	_t, err := time.Parse(layout, s)
 	if err != nil {
 		return err
 	}

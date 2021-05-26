@@ -167,6 +167,8 @@ func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *
 			URL:           url,
 			ResponseModel: &creativeResponse,
 		}
+
+		fmt.Println(requestConfig.URL)
 		_, _, e := service.get(&requestConfig)
 		if e != nil {
 			return nil, e
@@ -178,8 +180,50 @@ func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *
 			break
 		}
 
+		if creativeResponse.Paging.Next == "" {
+			break
+		}
+
 		url = creativeResponse.Paging.Next
 	}
 
 	return &creatives, nil
+}
+
+type GetCreativeConfig struct {
+	CreativeID int64
+	Fields     []CreativeField
+}
+
+func (service *Service) GetCreative(config *GetCreativeConfig) (*Creative, *errortools.Error) {
+	if config == nil {
+		return nil, errortools.ErrorMessage("GetCreativeConfig must not be a nil pointer")
+	}
+
+	values := url.Values{}
+	fields := []string{}
+	if len(config.Fields) == 0 {
+		fields = append(fields, string(CreativeFieldID))
+	} else {
+		for _, field := range config.Fields {
+			fields = append(fields, string(field))
+		}
+	}
+	values.Set("fields", strings.Join(fields, ","))
+
+	creative := Creative{}
+
+	url := service.url(fmt.Sprintf("%v?%s", config.CreativeID, values.Encode()))
+
+	requestConfig := go_http.RequestConfig{
+		URL:           url,
+		ResponseModel: &creative,
+	}
+
+	_, _, e := service.get(&requestConfig)
+	if e != nil {
+		return nil, e
+	}
+
+	return &creative, nil
 }

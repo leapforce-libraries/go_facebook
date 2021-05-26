@@ -1,15 +1,19 @@
 package facebook
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
 	go_http "github.com/leapforce-libraries/go_http"
 )
 
 const (
-	apiURL string = "https://graph.facebook.com/v10.0"
+	apiName               string = "facebook"
+	apiURL                string = "https://graph.facebook.com/v10.0"
+	errorCodeTooManyCalls int    = 80004
 )
 
 // Service stores Service configuration
@@ -60,6 +64,35 @@ func (service *Service) httpRequest(httpMethod string, requestConfig *go_http.Re
 		e.SetMessage(errorResponse.Error.Message)
 	}
 
+	if errorResponse.Error.Code == errorCodeTooManyCalls {
+		fmt.Println("Waiting another minute...")
+		time.Sleep(time.Minute)
+
+		return service.httpRequest(httpMethod, requestConfig)
+	}
+
+	if response != nil {
+		header := response.Header.Get("x-business-use-case-usage")
+		if header != "" {
+			businessUseCaseUsage := xBusinessUseCaseUsage{}
+			err := json.Unmarshal([]byte(header), &businessUseCaseUsage)
+			if err != nil {
+				errortools.CaptureError(err)
+			} else {
+				for _, b := range businessUseCaseUsage {
+					fmt.Printf("%+v\n", b)
+					if len(b) > 0 {
+						estimatedTimeToRegainAccess := b[0].EstimatedTimeToRegainAccess
+						if estimatedTimeToRegainAccess > 0 {
+							fmt.Printf("Waiting %v minutes to regain access...\n", estimatedTimeToRegainAccess)
+							time.Sleep(time.Minute * time.Duration(estimatedTimeToRegainAccess+1))
+						}
+					}
+				}
+			}
+		}
+	}
+
 	return request, response, e
 }
 
@@ -69,4 +102,20 @@ func (service *Service) url(path string) string {
 
 func (service *Service) get(requestConfig *go_http.RequestConfig) (*http.Request, *http.Response, *errortools.Error) {
 	return service.httpRequest(http.MethodGet, requestConfig)
+}
+
+func (service Service) APIName() string {
+	return apiName
+}
+
+func (service Service) APIKey() string {
+	return service.accessToken
+}
+
+func (service Service) APICallCount() int64 {
+	return service.httpService.RequestCount()
+}
+
+func (service Service) APIReset() {
+	service.httpService.ResetRequestCount()
 }

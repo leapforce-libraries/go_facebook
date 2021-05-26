@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 	"strings"
+	"time"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
 	f_types "github.com/leapforce-libraries/go_facebook/types"
@@ -75,6 +76,7 @@ const (
 
 type GetAdsConfig struct {
 	AccountID int64
+	Since     *time.Time
 	Fields    []AdField
 }
 
@@ -84,6 +86,7 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 	}
 
 	values := url.Values{}
+
 	fields := []string{}
 	if len(config.Fields) == 0 {
 		fields = append(fields, string(AdFieldID))
@@ -109,13 +112,34 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 			return nil, e
 		}
 
-		ads = append(ads, adResponse.Data...)
+		for _, ad := range adResponse.Data {
+			if ad.CreatedTime == nil {
+				continue
+			}
+
+			if config.Since != nil {
+				// stop when an ad cre before passed "since" was found
+				if ad.CreatedTime.Value().Before(*config.Since) {
+					fmt.Println("too early", ad.CreatedTime.Value())
+
+					return &ads, nil
+				}
+			}
+
+			ads = append(ads, ad)
+		}
 
 		if adResponse.Paging == nil {
 			break
 		}
 
+		if adResponse.Paging.Next == "" {
+			break
+		}
+
 		url = adResponse.Paging.Next
+
+		break //temp
 	}
 
 	return &ads, nil

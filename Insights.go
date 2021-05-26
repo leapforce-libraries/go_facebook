@@ -42,34 +42,34 @@ type Insights struct {
 	CampaignName                              *string                 `json:"campaign_name"`
 	CanvasAvgViewPercent                      *go_types.Float64String `json:"canvas_avg_view_percent"`
 	CanvasAvgViewTime                         *go_types.Float64String `json:"canvas_avg_view_time"`
-	CatalogSegmentActions                     json.RawMessage         `json:"catalog_segment_actions"`
-	CatalogSegmentValue                       json.RawMessage         `json:"catalog_segment_value"`
-	CatalogSegmentValueMobilePurchaseROAS     json.RawMessage         `json:"catalog_segment_value_mobile_purchase_roas"`
-	CatalogSegmentValueOmniPurchaseROAS       json.RawMessage         `json:"catalog_segment_value_omni_purchase_roas"`
-	CatalogSegmentValueWebsitePurchaseROAS    json.RawMessage         `json:"catalog_segment_value_website_purchase_roas"`
+	CatalogSegmentActions                     *[]AdsActionStats       `json:"catalog_segment_actions"`
+	CatalogSegmentValue                       *[]AdsActionStats       `json:"catalog_segment_value"`
+	CatalogSegmentValueMobilePurchaseROAS     *[]AdsActionStats       `json:"catalog_segment_value_mobile_purchase_roas"`
+	CatalogSegmentValueOmniPurchaseROAS       *[]AdsActionStats       `json:"catalog_segment_value_omni_purchase_roas"`
+	CatalogSegmentValueWebsitePurchaseROAS    *[]AdsActionStats       `json:"catalog_segment_value_website_purchase_roas"`
 	Clicks                                    *go_types.Int64String   `json:"clicks"`
 	ComparisonNode                            json.RawMessage         `json:"comparison_node"`
-	ConversionValues                          json.RawMessage         `json:"conversion_values"`
-	Conversions                               json.RawMessage         `json:"conversions"`
-	ConvertedProductQuantity                  json.RawMessage         `json:"converted_product_quantity"`
-	ConvertedProductValue                     json.RawMessage         `json:"converted_product_value"`
-	CostPer15SecVideoView                     json.RawMessage         `json:"cost_per_15_sec_video_view"`
-	CostPer2SecContinuousVideoView            json.RawMessage         `json:"cost_per_2_sec_continuous_video_view"`
-	CostPerActionType                         json.RawMessage         `json:"cost_per_action_type"`
-	CostPerAdClick                            json.RawMessage         `json:"cost_per_ad_click"`
-	CostPerConversion                         json.RawMessage         `json:"cost_per_conversion"`
+	ConversionValues                          *[]AdsActionStats       `json:"conversion_values"`
+	Conversions                               *[]AdsActionStats       `json:"conversions"`
+	ConvertedProductQuantity                  *[]AdsActionStats       `json:"converted_product_quantity"`
+	ConvertedProductValue                     *[]AdsActionStats       `json:"converted_product_value"`
+	CostPer15SecVideoView                     *[]AdsActionStats       `json:"cost_per_15_sec_video_view"`
+	CostPer2SecContinuousVideoView            *[]AdsActionStats       `json:"cost_per_2_sec_continuous_video_view"`
+	CostPerActionType                         *[]AdsActionStats       `json:"cost_per_action_type"`
+	CostPerAdClick                            *[]AdsActionStats       `json:"cost_per_ad_click"`
+	CostPerConversion                         *[]AdsActionStats       `json:"cost_per_conversion"`
 	CostPerDDACountByConvs                    *go_types.Float64String `json:"cost_per_dda_countby_convs"`
 	CostPerInlineLinkClick                    *go_types.Float64String `json:"cost_per_inline_link_click"`
 	CostPerInlinePostEngagement               *go_types.Float64String `json:"cost_per_inline_post_engagement"`
-	CostPerOneThousandAdImpression            json.RawMessage         `json:"cost_per_one_thousand_ad_impression"`
-	CostPerOutboundClick                      json.RawMessage         `json:"cost_per_outbound_click"`
-	CostPerStoreVisitAction                   json.RawMessage         `json:"cost_per_store_visit_action"`
-	CostPerThruplay                           json.RawMessage         `json:"cost_per_thruplay"`
-	CostPerUniqueActionType                   json.RawMessage         `json:"cost_per_unique_action_type"`
+	CostPerOneThousandAdImpression            *[]AdsActionStats       `json:"cost_per_one_thousand_ad_impression"`
+	CostPerOutboundClick                      *[]AdsActionStats       `json:"cost_per_outbound_click"`
+	CostPerStoreVisitAction                   *[]AdsActionStats       `json:"cost_per_store_visit_action"`
+	CostPerThruplay                           *[]AdsActionStats       `json:"cost_per_thruplay"`
+	CostPerUniqueActionType                   *[]AdsActionStats       `json:"cost_per_unique_action_type"`
 	CostPerUniqueClick                        *go_types.Float64String `json:"cost_per_unique_click"`
-	CostPerUniqueConversion                   json.RawMessage         `json:"cost_per_unique_conversion"`
+	CostPerUniqueConversion                   *[]AdsActionStats       `json:"cost_per_unique_conversion"`
 	CostPerUniqueInlineLinkClick              *go_types.Float64String `json:"cost_per_unique_inline_link_click"`
-	CostPerUniqueOutboundClick                json.RawMessage         `json:"cost_per_unique_outbound_click"`
+	CostPerUniqueOutboundClick                *[]AdsActionStats       `json:"cost_per_unique_outbound_click"`
 	Country                                   *string                 `json:"country"`
 	CPC                                       *go_types.Float64String `json:"cpc"`
 	CPM                                       *go_types.Float64String `json:"cpm"`
@@ -103,58 +103,80 @@ type Insights struct {
 	InstantExperienceClicksToOpen             *go_types.Int64String   `json:"instant_experience_clicks_to_open"`
 	InstantExperienceClicksToStart            *go_types.Int64String   `json:"instant_experience_clicks_to_start"`
 	InstantExperienceOutboundClicks           *go_types.Int64String   `json:"instant_experience_outbound_clicks"`
-	InteractiveComponentTap                   json.RawMessage         `json:"interactive_component_tap"`
+	InteractiveComponentTap                   *[]AdsActionStats       `json:"interactive_component_tap"`
 	Labels                                    *string                 `json:"labels"`
 	Location                                  *string                 `json:"location"`
 	MediaAsset                                json.RawMessage         `json:"media_asset"`
-	MobileAppPurchaseROAS                     json.RawMessage         `json:"mobile_app_purchase_roas"`
+	MobileAppPurchaseROAS                     *[]AdsActionStats       `json:"mobile_app_purchase_roas"`
 	Objective                                 *string                 `json:"objective"`
 	OptimizationGoal                          *string                 `json:"optimization_goal"`
-	OutboundClicks                            json.RawMessage         `json:"outbound_clicks"`
-	OutboundClicksCTR                         json.RawMessage         `json:"outbound_clicks_ctr"`
+	OutboundClicks                            *[]AdsActionStats       `json:"outbound_clicks"`
+	OutboundClicksCTR                         *[]AdsActionStats       `json:"outbound_clicks_ctr"`
 	PlacePageID                               *string                 `json:"place_page_id"`
 	PlacePageName                             *string                 `json:"place_page_name"`
 	PlatformPosition                          *string                 `json:"platform_position"`
 	ProductID                                 *string                 `json:"product_id"`
 	PublisherPlatform                         *string                 `json:"publisher_platform"`
-	PurchaseROAS                              json.RawMessage         `json:"purchase_roas"`
+	PurchaseROAS                              *[]AdsActionStats       `json:"purchase_roas"`
 	QualifyingQuestionQualifyAnswerRate       *go_types.Float64String `json:"qualifying_question_qualify_answer_rate"`
 	Reach                                     *go_types.Float64String `json:"reach"`
 	RuleAsset                                 json.RawMessage         `json:"rule_asset"`
 	SocialSpend                               *go_types.Float64String `json:"social_spend"`
 	Spend                                     *go_types.Float64String `json:"spend"`
-	StoreVisitActions                         json.RawMessage         `json:"store_visit_actions"`
+	StoreVisitActions                         *[]AdsActionStats       `json:"store_visit_actions"`
 	TitleAsset                                json.RawMessage         `json:"title_asset"`
-	UniqueActions                             json.RawMessage         `json:"unique_actions"`
+	UniqueActions                             *[]AdsActionStats       `json:"unique_actions"`
 	UniqueClicks                              *go_types.Int64String   `json:"unique_clicks"`
-	UniqueConversions                         json.RawMessage         `json:"unique_conversions"`
+	UniqueConversions                         *[]AdsActionStats       `json:"unique_conversions"`
 	UniqueCTR                                 *go_types.Float64String `json:"unique_ctr"`
 	UniqueInlineLinkClickCTR                  *go_types.Float64String `json:"unique_inline_link_click_ctr"`
 	UniqueInlineLinkClicks                    *go_types.Int64String   `json:"unique_inline_link_clicks"`
 	UniqueLinkClicksCTR                       *go_types.Float64String `json:"unique_link_clicks_ctr"`
-	UniqueOutboundClicks                      json.RawMessage         `json:"unique_outbound_clicks"`
-	UniqueOutboundClicksCTR                   json.RawMessage         `json:"unique_outbound_clicks_ctr"`
-	UniqueVideoView15Sec                      json.RawMessage         `json:"unique_video_view_15_sec"`
+	UniqueOutboundClicks                      *[]AdsActionStats       `json:"unique_outbound_clicks"`
+	UniqueOutboundClicksCTR                   *[]AdsActionStats       `json:"unique_outbound_clicks_ctr"`
+	UniqueVideoView15Sec                      *[]AdsActionStats       `json:"unique_video_view_15_sec"`
 	UpdatedTime                               *string                 `json:"updated_time"`
-	Video15SecWatchedActions                  json.RawMessage         `json:"video_15_sec_watched_actions"`
-	Video30SecWatchedActions                  json.RawMessage         `json:"video_30_sec_watched_actions"`
+	Video15SecWatchedActions                  *[]AdsActionStats       `json:"video_15_sec_watched_actions"`
+	Video30SecWatchedActions                  *[]AdsActionStats       `json:"video_30_sec_watched_actions"`
 	VideoAsset                                json.RawMessage         `json:"video_asset"`
-	VideoAvgTimeWatchedActions                json.RawMessage         `json:"video_avg_time_watched_actions"`
-	VideoContinuous2SecWatchedActions         json.RawMessage         `json:"video_continuous_2_sec_watched_actions"`
-	VideoP100WatchedActions                   json.RawMessage         `json:"video_p100_watched_actions"`
-	VideoP25WatchedActions                    json.RawMessage         `json:"video_p25_watched_actions"`
-	VideoP50WatchedActions                    json.RawMessage         `json:"video_p50_watched_actions"`
-	VideoP75WatchedActions                    json.RawMessage         `json:"video_p75_watched_actions"`
-	VideoP95WatchedActions                    json.RawMessage         `json:"video_p95_watched_actions"`
-	VideoPlayActions                          json.RawMessage         `json:"video_play_actions"`
+	VideoAvgTimeWatchedActions                *[]AdsActionStats       `json:"video_avg_time_watched_actions"`
+	VideoContinuous2SecWatchedActions         *[]AdsActionStats       `json:"video_continuous_2_sec_watched_actions"`
+	VideoP100WatchedActions                   *[]AdsActionStats       `json:"video_p100_watched_actions"`
+	VideoP25WatchedActions                    *[]AdsActionStats       `json:"video_p25_watched_actions"`
+	VideoP50WatchedActions                    *[]AdsActionStats       `json:"video_p50_watched_actions"`
+	VideoP75WatchedActions                    *[]AdsActionStats       `json:"video_p75_watched_actions"`
+	VideoP95WatchedActions                    *[]AdsActionStats       `json:"video_p95_watched_actions"`
+	VideoPlayActions                          *[]AdsActionStats       `json:"video_play_actions"`
 	VideoPlayCurveActions                     json.RawMessage         `json:"video_play_curve_actions"`
 	VideoPlayRetention0To15sActions           json.RawMessage         `json:"video_play_retention_0_to_15s_actions"`
 	VideoPlayRetention20To60sActions          json.RawMessage         `json:"video_play_retention_20_to_60s_actions"`
 	VideoPlayRetentionGraphActions            json.RawMessage         `json:"video_play_retention_graph_actions"`
-	VideoTimeWatchedActions                   json.RawMessage         `json:"video_time_watched_actions"`
-	WebsiteCTR                                json.RawMessage         `json:"website_ctr"`
-	WebsitePurchaseROAS                       json.RawMessage         `json:"website_purchase_roas"`
+	VideoTimeWatchedActions                   *[]AdsActionStats       `json:"video_time_watched_actions"`
+	WebsiteCTR                                *[]AdsActionStats       `json:"website_ctr"`
+	WebsitePurchaseROAS                       *[]AdsActionStats       `json:"website_purchase_roas"`
 	WishBid                                   *go_types.Float64String `json:"wish_bid"`
+}
+
+type AdsActionStats struct {
+	D1Click                   *go_types.Int64String `json:"1d_click"`
+	D1View                    *go_types.Int64String `json:"1d_view"`
+	D28Click                  *go_types.Int64String `json:"28d_click"`
+	D28View                   *go_types.Int64String `json:"28d_view"`
+	D7Click                   *go_types.Int64String `json:"7d_click"`
+	D7View                    *go_types.Int64String `json:"7d_view"`
+	ActionCanvasComponentName *string               `json:"action_canvas_component_name"`
+	ActionCarouselCardID      *string               `json:"action_carousel_card_id"`
+	ActionCarouselCardName    *string               `json:"action_carousel_card_name"`
+	ActionDestination         *string               `json:"action_destination"`
+	ActionDevice              *string               `json:"action_device"`
+	ActionReaction            *string               `json:"action_reaction"`
+	ActionTargetID            *string               `json:"action_target_id"`
+	ActionType                *string               `json:"action_type"`
+	ActionVideoSound          *string               `json:"action_video_sound"`
+	ActionVideoType           *string               `json:"action_video_type"`
+	DDA                       *go_types.Int64String `json:"dda"`
+	Inline                    *go_types.Int64String `json:"inline"`
+	Value                     *go_types.Int64String `json:"value"`
 }
 
 type InsightsField string
@@ -406,29 +428,33 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 
 	values.Set("fields", strings.Join(fields, ","))
 
-	adInsights := []Insights{}
+	insights := []Insights{}
 
 	url := service.url(fmt.Sprintf("%v/insights?%s", config.ID, values.Encode()))
 
 	for {
-		adInsightsResponse := InsightsResponse{}
+		insightsResponse := InsightsResponse{}
 		requestConfig := go_http.RequestConfig{
 			URL:           url,
-			ResponseModel: &adInsightsResponse,
+			ResponseModel: &insightsResponse,
 		}
 		_, _, e := service.get(&requestConfig)
 		if e != nil {
 			return nil, e
 		}
 
-		adInsights = append(adInsights, adInsightsResponse.Data...)
+		insights = append(insights, insightsResponse.Data...)
 
-		if adInsightsResponse.Paging == nil {
+		if insightsResponse.Paging == nil {
 			break
 		}
 
-		url = adInsightsResponse.Paging.Next
+		if insightsResponse.Paging.Next == "" {
+			break
+		}
+
+		url = insightsResponse.Paging.Next
 	}
 
-	return &adInsights, nil
+	return &insights, nil
 }

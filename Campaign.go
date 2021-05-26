@@ -141,6 +141,10 @@ func (service *Service) GetCampaigns(config *GetCampaignsConfig) (*[]Campaign, *
 			break
 		}
 
+		if campaignResponse.Paging.Next == "" {
+			break
+		}
+
 		url = campaignResponse.Paging.Next
 	}
 

@@ -173,6 +173,10 @@ func (service *Service) GetAdSets(config *GetAdSetsConfig) (*[]AdSet, *errortool
 			break
 		}
 
+		if adSetResponse.Paging.Next == "" {
+			break
+		}
+
 		url = adSetResponse.Paging.Next
 	}
 
