@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"strings"
 
+	"cloud.google.com/go/civil"
 	errortools "github.com/leapforce-libraries/go_errortools"
 	f_types "github.com/leapforce-libraries/go_facebook/types"
 	go_http "github.com/leapforce-libraries/go_http"
@@ -378,6 +379,11 @@ const (
 	TimeIncrementAllDays TimeIncrement = "all_days"
 )
 
+type TimeRange struct {
+	Since civil.Date `json:"since"`
+	Until civil.Date `json:"until"`
+}
+
 type GetInsightsConfig struct {
 	ID                int64
 	Breakdowns        *[]Breakdown
@@ -385,6 +391,7 @@ type GetInsightsConfig struct {
 	Fields            []InsightsField
 	TimeIncrement     *TimeIncrement
 	TimeIncrementDays *uint // 1 to 90
+	TimeRange         *TimeRange
 }
 
 func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *errortools.Error) {
@@ -426,11 +433,21 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 		values.Set("time_increment", fmt.Sprintf("%v", *config.TimeIncrementDays))
 	}
 
+	if config.TimeRange != nil {
+		b, err := json.Marshal(config.TimeRange)
+		if err != nil {
+			return nil, errortools.ErrorMessagef("Error while marshaling TimeRange: %v", err.Error())
+		}
+
+		values.Set("time_range", string(b))
+	}
+
 	values.Set("fields", strings.Join(fields, ","))
 
 	insights := []Insights{}
 
 	url := service.url(fmt.Sprintf("%v/insights?%s", config.ID, values.Encode()))
+	fmt.Println(url)
 
 	for {
 		insightsResponse := InsightsResponse{}

@@ -118,11 +118,11 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 			}
 
 			if config.Since != nil {
-				// stop when an ad cre before passed "since" was found
 				if ad.CreatedTime.Value().Before(*config.Since) {
-					fmt.Println("too early", ad.CreatedTime.Value())
+					continue
+					//fmt.Println("too early", ad.CreatedTime.Value())
 
-					return &ads, nil
+					//return &ads, nil
 				}
 			}
 
@@ -138,8 +138,6 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 		}
 
 		url = adResponse.Paging.Next
-
-		break //temp
 	}
 
 	return &ads, nil
