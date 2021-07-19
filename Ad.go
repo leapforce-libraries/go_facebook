@@ -120,9 +120,6 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 			if config.Since != nil {
 				if ad.CreatedTime.Value().Before(*config.Since) {
 					continue
-					//fmt.Println("too early", ad.CreatedTime.Value())
-
-					//return &ads, nil
 				}
 			}
 

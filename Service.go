@@ -7,6 +7,7 @@ import (
 	"time"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
+	ig "github.com/leapforce-libraries/go_integration"
 	go_http "github.com/leapforce-libraries/go_http"
 )
 
@@ -80,7 +81,9 @@ func (service *Service) httpRequest(httpMethod string, requestConfig *go_http.Re
 				errortools.CaptureError(err)
 			} else {
 				for _, b := range businessUseCaseUsage {
+					if ig.Debug(){
 					fmt.Printf("%+v\n", b)
+					}
 					if len(b) > 0 {
 						estimatedTimeToRegainAccess := b[0].EstimatedTimeToRegainAccess
 						if estimatedTimeToRegainAccess > 0 {

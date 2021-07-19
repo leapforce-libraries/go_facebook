@@ -168,7 +168,6 @@ func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *
 			ResponseModel: &creativeResponse,
 		}
 
-		fmt.Println(requestConfig.URL)
 		_, _, e := service.get(&requestConfig)
 		if e != nil {
 			return nil, e
@@ -214,7 +213,6 @@ func (service *Service) GetCreative(config *GetCreativeConfig) (*Creative, *erro
 	creative := Creative{}
 
 	url := service.url(fmt.Sprintf("%v?%s", config.CreativeID, values.Encode()))
-
 	requestConfig := go_http.RequestConfig{
 		URL:           url,
 		ResponseModel: &creative,

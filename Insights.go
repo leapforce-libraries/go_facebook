@@ -346,6 +346,19 @@ const (
 	DatePresetThisYear         DatePreset = "this_year"
 )
 
+type ActionAttributionWindow string
+
+const (
+	ActionAttributionWindow1dView   ActionAttributionWindow = "1d_view"
+	ActionAttributionWindow7dView   ActionAttributionWindow = "7d_view"
+	ActionAttributionWindow28dView  ActionAttributionWindow = "28d_view"
+	ActionAttributionWindow1dClick  ActionAttributionWindow = "1d_click"
+	ActionAttributionWindow7dClick  ActionAttributionWindow = "7d_click"
+	ActionAttributionWindow28dClick ActionAttributionWindow = "28d_click"
+	ActionAttributionWindowDDA      ActionAttributionWindow = "dda"
+	ActionAttributionWindowDefault  ActionAttributionWindow = "default"
+)
+
 type ActionBreakdown string
 
 const (
@@ -387,6 +400,15 @@ const (
 	BreakdownDevicePlatform                            Breakdown = "device_platform"
 )
 
+type Level string
+
+const (
+	LevelAccount  Level = "account"
+	LevelAd       Level = "ad"
+	LevelAdSet    Level = "adset"
+	LevelCampaign Level = "campaign"
+)
+
 type TimeIncrement string
 
 const (
@@ -400,14 +422,16 @@ type TimeRange struct {
 }
 
 type GetInsightsConfig struct {
-	ID                int64
-	ActionBreakdowns  *[]ActionBreakdown
-	Breakdowns        *[]Breakdown
-	DatePreset        *DatePreset
-	Fields            []InsightsField
-	TimeIncrement     *TimeIncrement
-	TimeIncrementDays *uint // 1 to 90
-	TimeRange         *TimeRange
+	ID                       int64
+	ActionAttributionWindows *[]ActionAttributionWindow
+	ActionBreakdowns         *[]ActionBreakdown
+	Breakdowns               *[]Breakdown
+	DatePreset               *DatePreset
+	Fields                   []InsightsField
+	Level                    *Level
+	TimeIncrement            *TimeIncrement
+	TimeIncrementDays        *uint // 1 to 90
+	TimeRange                *TimeRange
 }
 
 func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *errortools.Error) {
@@ -418,6 +442,15 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 	values := url.Values{}
 	fields := []string{}
 
+	if config.ActionAttributionWindows != nil {
+		if len(*config.ActionAttributionWindows) > 0 {
+			_actionAttributionWindows := []string{}
+			for _, actionAttributionWindow := range *config.ActionAttributionWindows {
+				_actionAttributionWindows = append(_actionAttributionWindows, string(actionAttributionWindow))
+			}
+			values.Set("action_attribution_windows", strings.Join(_actionAttributionWindows, ","))
+		}
+	}
 	if config.ActionBreakdowns != nil {
 		if len(*config.ActionBreakdowns) > 0 {
 			_actionBreakdowns := []string{}
@@ -446,6 +479,9 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 			fields = append(fields, string(field))
 		}
 	}
+	if config.Level != nil {
+		values.Set("level", string(*config.Level))
+	}
 	if config.TimeIncrement != nil && config.TimeIncrementDays != nil {
 		return nil, errortools.ErrorMessage("Do not supply TimeIncrement and TimeIncrementDays at the same time")
 	}
@@ -472,7 +508,6 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 	insights := []Insights{}
 
 	url := service.url(fmt.Sprintf("%v/insights?%s", config.ID, values.Encode()))
-	fmt.Println(url)
 
 	for {
 		insightsResponse := InsightsResponse{}
