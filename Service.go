@@ -7,8 +7,8 @@ import (
 	"time"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
-	ig "github.com/leapforce-libraries/go_integration"
 	go_http "github.com/leapforce-libraries/go_http"
+	ig "github.com/leapforce-libraries/go_integration"
 )
 
 const (
@@ -81,8 +81,8 @@ func (service *Service) httpRequest(httpMethod string, requestConfig *go_http.Re
 				errortools.CaptureError(err)
 			} else {
 				for _, b := range businessUseCaseUsage {
-					if ig.Debug(){
-					fmt.Printf("%+v\n", b)
+					if ig.Debug() {
+						fmt.Printf("%+v\n", b)
 					}
 					if len(b) > 0 {
 						estimatedTimeToRegainAccess := b[0].EstimatedTimeToRegainAccess
@@ -105,6 +105,10 @@ func (service *Service) url(path string) string {
 
 func (service *Service) get(requestConfig *go_http.RequestConfig) (*http.Request, *http.Response, *errortools.Error) {
 	return service.httpRequest(http.MethodGet, requestConfig)
+}
+
+func (service *Service) post(requestConfig *go_http.RequestConfig) (*http.Request, *http.Response, *errortools.Error) {
+	return service.httpRequest(http.MethodPost, requestConfig)
 }
 
 func (service Service) APIName() string {
