@@ -3,6 +3,7 @@ package facebook
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -164,11 +165,12 @@ func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *
 	for {
 		creativeResponse := CreativeResponse{}
 		requestConfig := go_http.RequestConfig{
+			Method:        http.MethodGet,
 			URL:           url,
 			ResponseModel: &creativeResponse,
 		}
 
-		_, _, e := service.get(&requestConfig)
+		_, _, e := service.httpRequest(&requestConfig)
 		if e != nil {
 			return nil, e
 		}
@@ -214,11 +216,12 @@ func (service *Service) GetCreative(config *GetCreativeConfig) (*Creative, *erro
 
 	url := service.url(fmt.Sprintf("%v?%s", config.CreativeID, values.Encode()))
 	requestConfig := go_http.RequestConfig{
+		Method:        http.MethodGet,
 		URL:           url,
 		ResponseModel: &creative,
 	}
 
-	_, _, e := service.get(&requestConfig)
+	_, _, e := service.httpRequest(&requestConfig)
 	if e != nil {
 		return nil, e
 	}

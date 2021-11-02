@@ -3,6 +3,7 @@ package facebook
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -512,10 +513,11 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 	for {
 		insightsResponse := InsightsResponse{}
 		requestConfig := go_http.RequestConfig{
+			Method:        http.MethodGet,
 			URL:           url,
 			ResponseModel: &insightsResponse,
 		}
-		_, _, e := service.get(&requestConfig)
+		_, _, e := service.httpRequest(&requestConfig)
 		if e != nil {
 			return nil, e
 		}

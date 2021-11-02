@@ -3,6 +3,7 @@ package facebook
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -159,10 +160,11 @@ func (service *Service) GetAdSets(config *GetAdSetsConfig) (*[]AdSet, *errortool
 	for {
 		adSetResponse := AdSetResponse{}
 		requestConfig := go_http.RequestConfig{
+			Method:        http.MethodGet,
 			URL:           url,
 			ResponseModel: &adSetResponse,
 		}
-		_, _, e := service.get(&requestConfig)
+		_, _, e := service.httpRequest(&requestConfig)
 		if e != nil {
 			return nil, e
 		}

@@ -89,7 +89,7 @@ func (service *Service) GetPostComments(config *GetPostCommentsConfig) (*PostCom
 	if e != nil {
 		return nil, e
 	}
-	_, _, e = service.get(requestConfig)
+	_, _, e = service.httpRequest(requestConfig)
 	if e != nil {
 		return nil, e
 	}

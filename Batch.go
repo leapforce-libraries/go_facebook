@@ -3,6 +3,7 @@ package facebook
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"strings"
 
 	errortools "github.com/leapforce-libraries/go_errortools"
@@ -93,11 +94,12 @@ func (service *Service) Batch(config *BatchConfig) (*[]BatchResponse, *errortool
 	response := []BatchResponse{}
 
 	requestConfig := go_http.RequestConfig{
+		Method:        http.MethodPost,
 		URL:           fmt.Sprintf("https://graph.facebook.com/me?%s", strings.Join(values, "&")),
 		ResponseModel: &response,
 	}
 	//fmt.Println(requestConfig.URL)
-	_, _, e := service.post(&requestConfig)
+	_, _, e := service.httpRequest(&requestConfig)
 	if e != nil {
 		return nil, e
 	}
