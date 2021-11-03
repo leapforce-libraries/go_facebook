@@ -13,7 +13,7 @@ import (
 
 const (
 	apiName               string = "facebook"
-	apiURL                string = "https://graph.facebook.com/v10.0"
+	apiURL                string = "https://graph.facebook.com/v11.0"
 	errorCodeTooManyCalls int    = 80004
 )
 
