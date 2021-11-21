@@ -141,7 +141,7 @@ const (
 
 type GetAccountConfig struct {
 	AccountID int64
-	Fields    []AccountField
+	Fields    *[]AccountField
 }
 
 func (service *Service) GetAccount(config *GetAccountConfig) (*Account, *errortools.Error) {
@@ -150,11 +150,9 @@ func (service *Service) GetAccount(config *GetAccountConfig) (*Account, *errorto
 	}
 
 	values := url.Values{}
-	fields := []string{}
-	if len(config.Fields) == 0 {
-		fields = append(fields, string(AccountFieldID))
-	} else {
-		for _, field := range config.Fields {
+	fields := []string{string(AccountFieldID)}
+	if config.Fields != nil {
+		for _, field := range *config.Fields {
 			fields = append(fields, string(field))
 		}
 	}
