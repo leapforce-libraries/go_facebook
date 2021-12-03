@@ -150,11 +150,14 @@ func (service *Service) GetAccount(config *GetAccountConfig) (*Account, *errorto
 	}
 
 	values := url.Values{}
-	fields := []string{string(AccountFieldID)}
+	fields := []string{}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
 			fields = append(fields, string(field))
 		}
+	}
+	if len(fields) == 0 {
+		fields = append(fields, string(AccountFieldID))
 	}
 	values.Set("fields", strings.Join(fields, ","))
 
