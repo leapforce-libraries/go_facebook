@@ -69,6 +69,7 @@ func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http
 		fmt.Println("Waiting another minute...")
 		time.Sleep(time.Minute)
 
+		// retry
 		return service.httpRequest(requestConfig)
 	}
 
@@ -89,6 +90,9 @@ func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http
 						if estimatedTimeToRegainAccess > 0 {
 							fmt.Printf("Waiting %v minutes to regain access...\n", estimatedTimeToRegainAccess)
 							time.Sleep(time.Minute * time.Duration(estimatedTimeToRegainAccess+1))
+
+							// retry
+							return service.httpRequest(requestConfig)
 						}
 					}
 				}
