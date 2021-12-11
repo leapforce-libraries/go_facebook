@@ -160,25 +160,25 @@ type Insights struct {
 }
 
 type AdsActionStats struct {
-	D1Click                   *go_types.Int64String   `json:"1d_click"`
-	D1View                    *go_types.Int64String   `json:"1d_view"`
-	D28Click                  *go_types.Int64String   `json:"28d_click"`
-	D28View                   *go_types.Int64String   `json:"28d_view"`
-	D7Click                   *go_types.Int64String   `json:"7d_click"`
-	D7View                    *go_types.Int64String   `json:"7d_view"`
-	ActionCanvasComponentName *string                 `json:"action_canvas_component_name"`
-	ActionCarouselCardID      *string                 `json:"action_carousel_card_id"`
-	ActionCarouselCardName    *string                 `json:"action_carousel_card_name"`
-	ActionDestination         *string                 `json:"action_destination"`
-	ActionDevice              *string                 `json:"action_device"`
-	ActionReaction            *string                 `json:"action_reaction"`
-	ActionTargetID            *string                 `json:"action_target_id"`
-	ActionType                *string                 `json:"action_type"`
-	ActionVideoSound          *string                 `json:"action_video_sound"`
-	ActionVideoType           *string                 `json:"action_video_type"`
-	DDA                       *go_types.Float64String `json:"dda"`
-	Inline                    *go_types.Float64String `json:"inline"`
-	Value                     *go_types.Float64String `json:"value"`
+	D1Click                   *string `json:"1d_click"`
+	D1View                    *string `json:"1d_view"`
+	D28Click                  *string `json:"28d_click"`
+	D28View                   *string `json:"28d_view"`
+	D7Click                   *string `json:"7d_click"`
+	D7View                    *string `json:"7d_view"`
+	ActionCanvasComponentName *string `json:"action_canvas_component_name"`
+	ActionCarouselCardID      *string `json:"action_carousel_card_id"`
+	ActionCarouselCardName    *string `json:"action_carousel_card_name"`
+	ActionDestination         *string `json:"action_destination"`
+	ActionDevice              *string `json:"action_device"`
+	ActionReaction            *string `json:"action_reaction"`
+	ActionTargetID            *string `json:"action_target_id"`
+	ActionType                *string `json:"action_type"`
+	ActionVideoSound          *string `json:"action_video_sound"`
+	ActionVideoType           *string `json:"action_video_type"`
+	DDA                       *string `json:"dda"`
+	Inline                    *string `json:"inline"`
+	Value                     *string `json:"value"`
 }
 
 type InsightsField string
