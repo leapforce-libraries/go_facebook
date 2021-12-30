@@ -82,6 +82,9 @@ func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPos
 	fields := []string{string(PagePublishedPostFieldID)}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
+			if field == PagePublishedPostFieldID {
+				continue
+			}
 			fields = append(fields, string(field))
 		}
 	}

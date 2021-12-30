@@ -37,12 +37,11 @@ type PostComment struct {
 }
 
 type GetPostCommentsConfig struct {
-	PostID      string
-	After       *string
-	Limit       *int64
-	Summary     bool
-	AccessToken *string
-	Filter      *PostCommentsFilter
+	PostID  string
+	After   *string
+	Limit   *int64
+	Summary bool
+	Filter  *PostCommentsFilter
 }
 
 // GetPostComments returns Facebook post comments for a post
@@ -62,9 +61,6 @@ func (service *Service) GetPostCommentsRequest(config *GetPostCommentsConfig) (*
 		values.Set("after", *config.After)
 	}
 	values.Set("summary", fmt.Sprintf("%v", config.Summary))
-	if config.AccessToken != nil {
-		values.Set("access_token", *config.AccessToken)
-	}
 	if config.Filter != nil {
 		values.Set("filter", string(*config.Filter))
 	}
@@ -96,35 +92,3 @@ func (service *Service) GetPostComments(config *GetPostCommentsConfig) (*PostCom
 
 	return response, nil
 }
-
-/*
-// PostCommentsCount returns Facebook post comments count for a post
-//
-func (service *Service) PostCommentsCount(postID string, accessToken string, filter *PostCommentsFilter) (*int64, *errortools.Error) {
-	path := fmt.Sprintf("/%s/comments", postID)
-
-	params := fb2.Params{
-		"limit":        0,
-		"access_token": accessToken,
-		"summary":      true,
-	}
-
-	if filter != nil {
-		params["filter"] = *filter
-	}
-
-	result, e := api.GetWithRetry(service.session, path, params)
-	if e != nil {
-		return nil, e
-	}
-
-	response := PostCommentsResponse{}
-	err := result.DecodeField("", &response)
-	//err = mapstructure.Decode(result, &response)
-	if err != nil {
-		return nil, errortools.ErrorMessage(err)
-	}
-
-	return &response.Summary.TotalCount, nil
-}
-*/

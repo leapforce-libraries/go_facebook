@@ -62,6 +62,9 @@ func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestC
 	fields := []string{string(PageFieldID)}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
+			if field == PageFieldID {
+				continue
+			}
 			fields = append(fields, string(field))
 		}
 	}

@@ -26,6 +26,9 @@ func (service *Service) GetPagePostRequest(config *GetPagePostConfig) (*go_http.
 	fields := []string{string(PagePublishedPostFieldID)}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
+			if field == PagePublishedPostFieldID {
+				continue
+			}
 			fields = append(fields, string(field))
 		}
 	}
