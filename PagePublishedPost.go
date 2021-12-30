@@ -57,11 +57,10 @@ const (
 )
 
 type GetPagePublishedPostsConfig struct {
-	PageID      string
-	After       *string
-	Limit       *int64
-	AccessToken *string
-	Fields      *[]PagePublishedPostField
+	PageID string
+	After  *string
+	Limit  *int64
+	Fields *[]PagePublishedPostField
 }
 
 // GetPagePublishedPosts returns Facebook post comments for a post
@@ -79,9 +78,6 @@ func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPos
 	values.Set("limit", fmt.Sprintf("%v", limit))
 	if config.After != nil {
 		values.Set("after", *config.After)
-	}
-	if config.AccessToken != nil {
-		values.Set("access_token", *config.AccessToken)
 	}
 	fields := []string{string(PagePublishedPostFieldID)}
 	if config.Fields != nil {
