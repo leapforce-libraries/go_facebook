@@ -81,7 +81,6 @@ func (service *Service) GetPostCommentsRequest(config *GetPostCommentsConfig) (*
 //
 func (service *Service) GetPostComments(config *GetPostCommentsConfig) (*PostCommentsResponse, *errortools.Error) {
 	requestConfig, response, e := service.GetPostCommentsRequest(config)
-	fmt.Println(requestConfig.URL)
 	if e != nil {
 		return nil, e
 	}
