@@ -20,20 +20,20 @@ type PagePublishedPostsResponse struct {
 }
 
 type PagePublishedPost struct {
-	ID           string                  `json:"id"`
+	Id           string                  `json:"id"`
 	Attachments  *Attachments            `json:"attachments"`
 	CreatedTime  *f_types.DateTimeString `json:"created_time"`
 	From         PagePostFrom            `json:"from"`
 	FullPicture  *string                 `json:"full_picture"`
 	Message      *string                 `json:"message"`
-	PermalinkURL *string                 `json:"permalink_url"`
+	PermalinkUrl *string                 `json:"permalink_url"`
 	Shares       PagePostShares          `json:"shares"`
 	StatusType   *string                 `json:"status_type"`
 	UpdatedTime  *f_types.DateTimeString `json:"updated_time"`
 }
 
 type PagePostFrom struct {
-	ID   string `json:"id"`
+	Id   string `json:"id"`
 	Name string `json:"name"`
 }
 
@@ -44,20 +44,20 @@ type PagePostShares struct {
 type PagePublishedPostField string
 
 const (
-	PagePublishedPostFieldID           PagePublishedPostField = "id"
+	PagePublishedPostFieldId           PagePublishedPostField = "id"
 	PagePublishedPostFieldAttachments  PagePublishedPostField = "attachments"
 	PagePublishedPostFieldCreatedTime  PagePublishedPostField = "created_time"
 	PagePublishedPostFieldFrom         PagePublishedPostField = "from"
 	PagePublishedPostFieldFullPicture  PagePublishedPostField = "full_picture"
 	PagePublishedPostFieldMessage      PagePublishedPostField = "message"
-	PagePublishedPostFieldPermalinkURL PagePublishedPostField = "permalink_url"
+	PagePublishedPostFieldPermalinkUrl PagePublishedPostField = "permalink_url"
 	PagePublishedPostFieldShares       PagePublishedPostField = "shares"
 	PagePublishedPostFieldStatusType   PagePublishedPostField = "status_type"
 	PagePublishedPostFieldUpdatedTime  PagePublishedPostField = "updated_time"
 )
 
 type GetPagePublishedPostsConfig struct {
-	PageID      string
+	PageId      string
 	After       *string
 	Limit       *int64
 	AccessToken *string
@@ -83,10 +83,10 @@ func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPos
 	if config.AccessToken != nil {
 		values.Set("access_token", *config.AccessToken)
 	}
-	fields := []string{string(PagePublishedPostFieldID)}
+	fields := []string{string(PagePublishedPostFieldId)}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
-			if field == PagePublishedPostFieldID {
+			if field == PagePublishedPostFieldId {
 				continue
 			}
 			fields = append(fields, string(field))
@@ -95,11 +95,11 @@ func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPos
 	values.Set("fields", strings.Join(fields, ","))
 
 	response := PagePublishedPostsResponse{}
-	relativeURL := fmt.Sprintf("%s/published_posts?%s", config.PageID, values.Encode())
+	relativeUrl := fmt.Sprintf("%s/published_posts?%s", config.PageId, values.Encode())
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		RelativeURL:   relativeURL,
-		URL:           service.url(relativeURL),
+		RelativeUrl:   relativeUrl,
+		Url:           service.url(relativeUrl),
 		ResponseModel: &response,
 	}
 

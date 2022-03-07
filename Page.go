@@ -11,7 +11,7 @@ import (
 )
 
 type Page struct {
-	ID             string   `json:"id"`
+	Id             string   `json:"id"`
 	AccessToken    string   `json:"access_token"`
 	Bio            string   `json:"bio"`
 	Category       string   `json:"category"`
@@ -26,12 +26,12 @@ type Page struct {
 type PageField string
 
 const (
-	PageFieldID            PageField = "id"
+	PageFieldId            PageField = "id"
 	PageFieldAbout         PageField = "about"
 	PageFieldAccessToken   PageField = "access_token"
 	PageFieldAdCampaign    PageField = "ad_campaign"
 	PageFieldAffiliation   PageField = "affiliation"
-	PageFieldAppID         PageField = "app_id"
+	PageFieldAppId         PageField = "app_id"
 	PageFieldArtistsWeLike PageField = "artists_we_like"
 	PageFieldAttire        PageField = "attire"
 	PageFieldAwards        PageField = "awards"
@@ -47,7 +47,7 @@ const (
 )
 
 type GetPageConfig struct {
-	PageID string
+	PageId string
 	Fields *[]PageField
 }
 
@@ -59,10 +59,10 @@ func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestC
 	}
 
 	values := url.Values{}
-	fields := []string{string(PageFieldID)}
+	fields := []string{string(PageFieldId)}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
-			if field == PageFieldID {
+			if field == PageFieldId {
 				continue
 			}
 			fields = append(fields, string(field))
@@ -71,11 +71,11 @@ func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestC
 	values.Set("fields", strings.Join(fields, ","))
 
 	response := Page{}
-	relativeURL := fmt.Sprintf("%s?%s", config.PageID, values.Encode())
+	relativeUrl := fmt.Sprintf("%s?%s", config.PageId, values.Encode())
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		RelativeURL:   relativeURL,
-		URL:           service.url(relativeURL),
+		RelativeUrl:   relativeUrl,
+		Url:           service.url(relativeUrl),
 		ResponseModel: &response,
 	}
 

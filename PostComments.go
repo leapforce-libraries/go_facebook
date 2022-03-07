@@ -31,13 +31,13 @@ type PostCommentsSummary struct {
 }
 
 type PostComment struct {
-	ID          string `json:"id"`
+	Id          string `json:"id"`
 	CreatedTime string `json:"created_time"`
 	Message     string `json:"message"`
 }
 
 type GetPostCommentsConfig struct {
-	PostID  string
+	PostId  string
 	After   *string
 	Limit   *int64
 	Summary bool
@@ -66,11 +66,11 @@ func (service *Service) GetPostCommentsRequest(config *GetPostCommentsConfig) (*
 	}
 
 	response := PostCommentsResponse{}
-	relativeURL := fmt.Sprintf("%s/comments?%s", config.PostID, values.Encode())
+	relativeUrl := fmt.Sprintf("%s/comments?%s", config.PostId, values.Encode())
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		RelativeURL:   relativeURL,
-		URL:           service.url(relativeURL),
+		RelativeUrl:   relativeUrl,
+		Url:           service.url(relativeUrl),
 		ResponseModel: &response,
 	}
 

@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-type AccountID int64
+type AccountId int64
 
-func (a *AccountID) UnmarshalJSON(b []byte) error {
+func (a *AccountId) UnmarshalJSON(b []byte) error {
 	prefix := "act_"
 
 	unquoted, err := strconv.Unquote(string(b))
@@ -21,12 +21,12 @@ func (a *AccountID) UnmarshalJSON(b []byte) error {
 
 	if unquoted == "" {
 		a = nil
-		return errors.New("Error parsing to AccountID")
+		return errors.New("error parsing to AccountId")
 	}
 
 	if !strings.HasPrefix(unquoted, prefix) {
 		a = nil
-		return fmt.Errorf("AccountID does not have prefix '%s'", prefix)
+		return fmt.Errorf("AccountId does not have prefix '%s'", prefix)
 	}
 	unquoted = strings.TrimLeft(unquoted, prefix)
 
@@ -35,11 +35,11 @@ func (a *AccountID) UnmarshalJSON(b []byte) error {
 		return err
 	}
 
-	*a = AccountID(i)
+	*a = AccountId(i)
 	return nil
 }
 
-func (a *AccountID) Value() int64 {
+func (a *AccountId) Value() int64 {
 	if a == nil {
 		return 0
 	}

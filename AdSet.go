@@ -161,7 +161,7 @@ func (service *Service) GetAdSets(config *GetAdSetsConfig) (*[]AdSet, *errortool
 		adSetResponse := AdSetResponse{}
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
-			URL:           url,
+			Url:           url,
 			ResponseModel: &adSetResponse,
 		}
 		_, _, e := service.httpRequest(&requestConfig)

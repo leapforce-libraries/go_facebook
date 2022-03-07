@@ -21,17 +21,17 @@ type InsightsResponse struct {
 
 type Insights struct {
 	AccountCurrency                           *string                 `json:"account_currency"`
-	AccountID                                 *go_types.Int64String   `json:"account_id"`
+	AccountId                                 *go_types.Int64String   `json:"account_id"`
 	AccountName                               *string                 `json:"account_name"`
 	ActionValues                              *[]AdsActionStats       `json:"action_values"`
 	Actions                                   *[]AdsActionStats       `json:"actions"`
 	ActivityRecency                           *string                 `json:"activity_recency"`
 	AdClickActions                            json.RawMessage         `json:"ad_click_actions"`
 	AdFormatAsset                             *string                 `json:"ad_format_asset"`
-	AdID                                      *go_types.Int64String   `json:"ad_id"`
+	AdId                                      *go_types.Int64String   `json:"ad_id"`
 	AdImpressionActions                       json.RawMessage         `json:"ad_impression_actions"`
 	AdName                                    *string                 `json:"ad_name"`
-	AdsetID                                   *string                 `json:"adset_id"`
+	AdsetId                                   *string                 `json:"adset_id"`
 	AdsetName                                 *string                 `json:"adset_name"`
 	AgeTargeting                              *string                 `json:"age_targeting"`
 	AttributionSetting                        *string                 `json:"attribution_setting"`
@@ -40,7 +40,7 @@ type Insights struct {
 	AuctionMaxCompetitorBid                   *go_types.Float64String `json:"auction_max_competitor_bid"`
 	BodyAsset                                 json.RawMessage         `json:"body_asset"`
 	BuyingType                                *string                 `json:"buying_type"`
-	CampaignID                                *go_types.Int64String   `json:"campaign_id"`
+	CampaignId                                *go_types.Int64String   `json:"campaign_id"`
 	CampaignName                              *string                 `json:"campaign_name"`
 	CanvasAvgViewPercent                      *go_types.Float64String `json:"canvas_avg_view_percent"`
 	CanvasAvgViewTime                         *go_types.Float64String `json:"canvas_avg_view_time"`
@@ -114,10 +114,10 @@ type Insights struct {
 	OptimizationGoal                          *string                 `json:"optimization_goal"`
 	OutboundClicks                            *[]AdsActionStats       `json:"outbound_clicks"`
 	OutboundClicksCTR                         *[]AdsActionStats       `json:"outbound_clicks_ctr"`
-	PlacePageID                               *string                 `json:"place_page_id"`
+	PlacePageId                               *string                 `json:"place_page_id"`
 	PlacePageName                             *string                 `json:"place_page_name"`
 	PlatformPosition                          *string                 `json:"platform_position"`
-	ProductID                                 *string                 `json:"product_id"`
+	ProductId                                 *string                 `json:"product_id"`
 	PublisherPlatform                         *string                 `json:"publisher_platform"`
 	PurchaseROAS                              *[]AdsActionStats       `json:"purchase_roas"`
 	QualifyingQuestionQualifyAnswerRate       *go_types.Float64String `json:"qualifying_question_qualify_answer_rate"`
@@ -167,12 +167,12 @@ type AdsActionStats struct {
 	D7Click                   *string `json:"7d_click"`
 	D7View                    *string `json:"7d_view"`
 	ActionCanvasComponentName *string `json:"action_canvas_component_name"`
-	ActionCarouselCardID      *string `json:"action_carousel_card_id"`
+	ActionCarouselCardId      *string `json:"action_carousel_card_id"`
 	ActionCarouselCardName    *string `json:"action_carousel_card_name"`
 	ActionDestination         *string `json:"action_destination"`
 	ActionDevice              *string `json:"action_device"`
 	ActionReaction            *string `json:"action_reaction"`
-	ActionTargetID            *string `json:"action_target_id"`
+	ActionTargetId            *string `json:"action_target_id"`
 	ActionType                *string `json:"action_type"`
 	ActionVideoSound          *string `json:"action_video_sound"`
 	ActionVideoType           *string `json:"action_video_type"`
@@ -185,17 +185,17 @@ type InsightsField string
 
 const (
 	InsightsFieldAccountCurrency                           InsightsField = "account_currency"
-	InsightsFieldAccountID                                 InsightsField = "account_id"
+	InsightsFieldAccountId                                 InsightsField = "account_id"
 	InsightsFieldAccountName                               InsightsField = "account_name"
 	InsightsFieldActionValues                              InsightsField = "action_values"
 	InsightsFieldActions                                   InsightsField = "actions"
 	InsightsFieldActivityRecency                           InsightsField = "activity_recency"
 	InsightsFieldAdClickActions                            InsightsField = "ad_click_actions"
 	InsightsFieldAdFormatAsset                             InsightsField = "ad_format_asset"
-	InsightsFieldAdID                                      InsightsField = "ad_id"
+	InsightsFieldAdId                                      InsightsField = "ad_id"
 	InsightsFieldAdImpressionActions                       InsightsField = "ad_impression_actions"
 	InsightsFieldAdName                                    InsightsField = "ad_name"
-	InsightsFieldAdsetID                                   InsightsField = "adset_id"
+	InsightsFieldAdsetId                                   InsightsField = "adset_id"
 	InsightsFieldAdsetName                                 InsightsField = "adset_name"
 	InsightsFieldAgeTargeting                              InsightsField = "age_targeting"
 	InsightsFieldAttributionSetting                        InsightsField = "attribution_setting"
@@ -204,7 +204,7 @@ const (
 	InsightsFieldAuctionMaxCompetitorBid                   InsightsField = "auction_max_competitor_bid"
 	InsightsFieldBodyAsset                                 InsightsField = "body_asset"
 	InsightsFieldBuyingType                                InsightsField = "buying_type"
-	InsightsFieldCampaignID                                InsightsField = "campaign_id"
+	InsightsFieldCampaignId                                InsightsField = "campaign_id"
 	InsightsFieldCampaignName                              InsightsField = "campaign_name"
 	InsightsFieldCanvasAvgViewPercent                      InsightsField = "canvas_avg_view_percent"
 	InsightsFieldCanvasAvgViewTime                         InsightsField = "canvas_avg_view_time"
@@ -278,10 +278,10 @@ const (
 	InsightsFieldOptimizationGoal                          InsightsField = "optimization_goal"
 	InsightsFieldOutboundClicks                            InsightsField = "outbound_clicks"
 	InsightsFieldOutboundClicksCTR                         InsightsField = "outbound_clicks_ctr"
-	InsightsFieldPlacePageID                               InsightsField = "place_page_id"
+	InsightsFieldPlacePageId                               InsightsField = "place_page_id"
 	InsightsFieldPlacePageName                             InsightsField = "place_page_name"
 	InsightsFieldPlatformPosition                          InsightsField = "platform_position"
-	InsightsFieldProductID                                 InsightsField = "product_id"
+	InsightsFieldProductId                                 InsightsField = "product_id"
 	InsightsFieldPublisherPlatform                         InsightsField = "publisher_platform"
 	InsightsFieldPurchaseROAS                              InsightsField = "purchase_roas"
 	InsightsFieldQualifyingQuestionQualifyAnswerRate       InsightsField = "qualifying_question_qualify_answer_rate"
@@ -365,11 +365,11 @@ type ActionBreakdown string
 const (
 	ActionBreakdownDevice              ActionBreakdown = "action_device"
 	ActionBreakdownCanvasComponentName ActionBreakdown = "action_canvas_component_name"
-	ActionBreakdownCarouselCardID      ActionBreakdown = "action_carousel_card_id"
+	ActionBreakdownCarouselCardId      ActionBreakdown = "action_carousel_card_id"
 	ActionBreakdownCarouselCardName    ActionBreakdown = "action_carousel_card_name"
 	ActionBreakdownDestination         ActionBreakdown = "action_destination"
 	ActionBreakdownReaction            ActionBreakdown = "action_reaction"
-	ActionBreakdownTargetID            ActionBreakdown = "action_target_id"
+	ActionBreakdownTargetId            ActionBreakdown = "action_target_id"
 	ActionBreakdownType                ActionBreakdown = "action_type"
 	ActionBreakdownVideoSound          ActionBreakdown = "action_video_sound"
 	ActionBreakdownVideoType           ActionBreakdown = "action_video_type"
@@ -386,8 +386,8 @@ const (
 	BreakdownDescriptionAsset                          Breakdown = "description_asset"
 	BreakdownGender                                    Breakdown = "gender"
 	BreakdownImageAsset                                Breakdown = "image_asset"
-	BreakdownLinkURLAsset                              Breakdown = "link_url_asset"
-	BreakdownProductID                                 Breakdown = "product_id"
+	BreakdownLinkUrlAsset                              Breakdown = "link_url_asset"
+	BreakdownProductId                                 Breakdown = "product_id"
 	BreakdownRegion                                    Breakdown = "region"
 	BreakdownTitleAsset                                Breakdown = "title_asset"
 	BreakdownVideoAsset                                Breakdown = "video_asset"
@@ -395,7 +395,7 @@ const (
 	BreakdownFrequencyValue                            Breakdown = "frequency_value"
 	BreakdownHourlyStatsAggregatedByAdvertiserTimeZone Breakdown = "hourly_stats_aggregated_by_advertiser_time_zone"
 	BreakdownHourlyStatsAggregatedByAudienceTimeZone   Breakdown = "hourly_stats_aggregated_by_audience_time_zone"
-	BreakdownPlacePageID                               Breakdown = "place_page_id"
+	BreakdownPlacePageId                               Breakdown = "place_page_id"
 	BreakdownPublisherPlatform                         Breakdown = "publisher_platform"
 	BreakdownPlatformPosition                          Breakdown = "platform_position"
 	BreakdownDevicePlatform                            Breakdown = "device_platform"
@@ -423,7 +423,7 @@ type TimeRange struct {
 }
 
 type GetInsightsConfig struct {
-	ID                       int64
+	Id                       int64
 	ActionAttributionWindows *[]ActionAttributionWindow
 	ActionBreakdowns         *[]ActionBreakdown
 	Breakdowns               *[]Breakdown
@@ -474,7 +474,7 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 		values.Set("date_preset", string(*config.DatePreset))
 	}
 	if len(config.Fields) == 0 {
-		fields = append(fields, string(InsightsFieldAdID))
+		fields = append(fields, string(InsightsFieldAdId))
 	} else {
 		for _, field := range config.Fields {
 			fields = append(fields, string(field))
@@ -508,13 +508,13 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 
 	insights := []Insights{}
 
-	url := service.url(fmt.Sprintf("%v/insights?%s", config.ID, values.Encode()))
+	url := service.url(fmt.Sprintf("%v/insights?%s", config.Id, values.Encode()))
 
 	for {
 		insightsResponse := InsightsResponse{}
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
-			URL:           url,
+			Url:           url,
 			ResponseModel: &insightsResponse,
 		}
 		_, _, e := service.httpRequest(&requestConfig)

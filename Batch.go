@@ -31,7 +31,7 @@ type BatchConfig struct {
 
 type BatchEntry struct {
 	Method      string `json:"method"`
-	RelativeURL string `json:"relative_url"`
+	RelativeUrl string `json:"relative_url"`
 }
 
 func (batchConfig BatchConfig) IsFull() bool {
@@ -63,13 +63,13 @@ func (service *Service) Batch(config *BatchConfig) (*[]BatchResponse, *errortool
 			continue
 		}
 
-		if requestConfig.RelativeURL == "" {
-			return nil, errortools.ErrorMessage("RequestConfig.RelativeURL should be entered for Batch endpoint")
+		if requestConfig.RelativeUrl == "" {
+			return nil, errortools.ErrorMessage("RequestConfig.RelativeUrl should be entered for Batch endpoint")
 		}
 
 		batch = append(batch, BatchEntry{
 			Method:      requestConfig.Method,
-			RelativeURL: requestConfig.RelativeURL,
+			RelativeUrl: requestConfig.RelativeUrl,
 		})
 	}
 
@@ -95,10 +95,10 @@ func (service *Service) Batch(config *BatchConfig) (*[]BatchResponse, *errortool
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodPost,
-		URL:           fmt.Sprintf("https://graph.facebook.com/me?%s", strings.Join(values, "&")),
+		Url:           fmt.Sprintf("https://graph.facebook.com/me?%s", strings.Join(values, "&")),
 		ResponseModel: &response,
 	}
-	//fmt.Println(requestConfig.URL)
+	//fmt.Println(requestConfig.Url)
 	_, _, e := service.httpRequest(&requestConfig)
 	if e != nil {
 		return nil, e

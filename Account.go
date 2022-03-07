@@ -14,8 +14,8 @@ import (
 )
 
 type Account struct {
-	ID                                AccountID               `json:"id"`
-	AccountID                         *go_types.Int64String   `json:"account_id"`
+	Id                                AccountId               `json:"id"`
+	AccountId                         *go_types.Int64String   `json:"account_id"`
 	AccountStatus                     *AccountStatus          `json:"account_status"`
 	AdAccountPromotableObjects        json.RawMessage         `json:"ad_account_promotable_objects"`
 	Age                               *float64                `json:"age"`
@@ -53,7 +53,7 @@ type Account struct {
 	IsNotificationsEnabled            *bool                   `json:"is_notifications_enabled"`
 	IsPersonal                        *uint32                 `json:"is_personal"`
 	IsPrepayAccount                   *bool                   `json:"is_prepay_account"`
-	IsTaxIDRequired                   *bool                   `json:"is_tax_id_required"`
+	IsTaxIdRequired                   *bool                   `json:"is_tax_id_required"`
 	LineNumbers                       *[]int                  `json:"line_numbers"`
 	MediaAgency                       *go_types.Int64String   `json:"media_agency"`
 	MinCampaignGroupSpendCapap        *go_types.Int64String   `json:"min_campaign_group_spend_cap"`
@@ -65,10 +65,10 @@ type Account struct {
 	ReachFrequencySpec                json.RawMessage         `json:"rf_spec"`
 	ShowCheckoutExperience            *bool                   `json:"show_checkout_experience"`
 	SpendCap                          *go_types.Int64String   `json:"spend_cap"`
-	TaxID                             *string                 `json:"tax_id"`
-	TaxIDStatus                       *uint32                 `json:"tax_id_status"`
-	TaxIDType                         *string                 `json:"tax_id_type"`
-	TimezoneID                        *uint32                 `json:"timezone_id"`
+	TaxId                             *string                 `json:"tax_id"`
+	TaxIdStatus                       *uint32                 `json:"tax_id_status"`
+	TaxIdType                         *string                 `json:"tax_id_type"`
+	TimezoneId                        *uint32                 `json:"timezone_id"`
 	TimezoneName                      *string                 `json:"timezone_name"`
 	TimezoneOffsetHoursUTC            *float64                `json:"timezone_offset_hours_utc"`
 	ToSAccepted                       *map[string]int32       `json:"tos_accepted"`
@@ -78,8 +78,8 @@ type Account struct {
 type AccountField string
 
 const (
-	AccountFieldID                                AccountField = "id"
-	AccountFieldAccountID                         AccountField = "account_id"
+	AccountFieldId                                AccountField = "id"
+	AccountFieldAccountId                         AccountField = "account_id"
 	AccountFieldAccountStatus                     AccountField = "account_status"
 	AccountFieldAdAccountPromotableObjects        AccountField = "ad_account_promotable_objects"
 	AccountFieldAge                               AccountField = "age"
@@ -117,7 +117,7 @@ const (
 	AccountFieldIsNotificationsEnabled            AccountField = "is_notifications_enabled"
 	AccountFieldIsPersonal                        AccountField = "is_personal"
 	AccountFieldIsPrepayAccount                   AccountField = "is_prepay_account"
-	AccountFieldIsTaxIDRequired                   AccountField = "is_tax_id_required"
+	AccountFieldIsTaxIdRequired                   AccountField = "is_tax_id_required"
 	AccountFieldLineNumbers                       AccountField = "line_numbers"
 	AccountFieldMediaAgency                       AccountField = "media_agency"
 	AccountFieldMinCampaignGroupSpendCapap        AccountField = "min_campaign_group_spend_cap"
@@ -129,10 +129,10 @@ const (
 	AccountFieldReachFrequencySpec                AccountField = "rf_spec"
 	AccountFieldShowCheckoutExperience            AccountField = "show_checkout_experience"
 	AccountFieldSpendCap                          AccountField = "spend_cap"
-	AccountFieldTaxID                             AccountField = "tax_id"
-	AccountFieldTaxIDStatus                       AccountField = "tax_id_status"
-	AccountFieldTaxIDType                         AccountField = "tax_id_type"
-	AccountFieldTimezoneID                        AccountField = "timezone_id"
+	AccountFieldTaxId                             AccountField = "tax_id"
+	AccountFieldTaxIdStatus                       AccountField = "tax_id_status"
+	AccountFieldTaxIdType                         AccountField = "tax_id_type"
+	AccountFieldTimezoneId                        AccountField = "timezone_id"
 	AccountFieldTimezoneName                      AccountField = "timezone_name"
 	AccountFieldTimezoneOffsetHoursUTC            AccountField = "timezone_offset_hours_utc"
 	AccountFieldToSAccepted                       AccountField = "tos_accepted"
@@ -140,7 +140,7 @@ const (
 )
 
 type GetAccountConfig struct {
-	AccountID int64
+	AccountId int64
 	Fields    *[]AccountField
 }
 
@@ -157,14 +157,14 @@ func (service *Service) GetAccount(config *GetAccountConfig) (*Account, *errorto
 		}
 	}
 	if len(fields) == 0 {
-		fields = append(fields, string(AccountFieldID))
+		fields = append(fields, string(AccountFieldId))
 	}
 	values.Set("fields", strings.Join(fields, ","))
 
 	account := Account{}
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		URL:           service.url(fmt.Sprintf("act_%v?%s", config.AccountID, values.Encode())),
+		Url:           service.url(fmt.Sprintf("act_%v?%s", config.AccountId, values.Encode())),
 		ResponseModel: &account,
 	}
 	_, _, e := service.httpRequest(&requestConfig)

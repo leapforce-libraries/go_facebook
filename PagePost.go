@@ -11,7 +11,7 @@ import (
 )
 
 type GetPagePostConfig struct {
-	PostID string
+	PostId string
 	Fields *[]PagePublishedPostField
 }
 
@@ -23,10 +23,10 @@ func (service *Service) GetPagePostRequest(config *GetPagePostConfig) (*go_http.
 	}
 
 	values := url.Values{}
-	fields := []string{string(PagePublishedPostFieldID)}
+	fields := []string{string(PagePublishedPostFieldId)}
 	if config.Fields != nil {
 		for _, field := range *config.Fields {
-			if field == PagePublishedPostFieldID {
+			if field == PagePublishedPostFieldId {
 				continue
 			}
 			fields = append(fields, string(field))
@@ -35,11 +35,11 @@ func (service *Service) GetPagePostRequest(config *GetPagePostConfig) (*go_http.
 	values.Set("fields", strings.Join(fields, ","))
 
 	response := PagePublishedPost{}
-	relativeURL := fmt.Sprintf("%s?%s", config.PostID, values.Encode())
+	relativeUrl := fmt.Sprintf("%s?%s", config.PostId, values.Encode())
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		RelativeURL:   relativeURL,
-		URL:           service.url(relativeURL),
+		RelativeUrl:   relativeUrl,
+		Url:           service.url(relativeUrl),
 		ResponseModel: &response,
 	}
 

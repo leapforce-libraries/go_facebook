@@ -106,7 +106,7 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 		adResponse := AdResponse{}
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
-			URL:           url,
+			Url:           url,
 			ResponseModel: &adResponse,
 		}
 		_, _, e := service.httpRequest(&requestConfig)

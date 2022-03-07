@@ -129,7 +129,7 @@ func (service *Service) GetCampaigns(config *GetCampaignsConfig) (*[]Campaign, *
 		campaignResponse := CampaignResponse{}
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
-			URL:           url,
+			Url:           url,
 			ResponseModel: &campaignResponse,
 		}
 		_, _, e := service.httpRequest(&requestConfig)

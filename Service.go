@@ -13,7 +13,7 @@ import (
 
 const (
 	apiName               string = "facebook"
-	apiURL                string = "https://graph.facebook.com/v12.0"
+	apiUrl                string = "https://graph.facebook.com/v13.0"
 	errorCodeTooManyCalls int    = 80004
 )
 
@@ -60,7 +60,7 @@ func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http
 	errorResponse := ErrorResponse{}
 	(*requestConfig).ErrorModel = &errorResponse
 
-	request, response, e := service.httpService.HTTPRequest(requestConfig)
+	request, response, e := service.httpService.HttpRequest(requestConfig)
 	if errorResponse.Error.Message != "" {
 		e.SetMessage(errorResponse.Error.Message)
 	}
@@ -104,7 +104,11 @@ func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http
 }
 
 func (service *Service) url(path string) string {
-	return fmt.Sprintf("%s/%s", apiURL, path)
+	return fmt.Sprintf("%s/%s", apiUrl, path)
+}
+
+func (service *Service) AccessToken(accessToken string) {
+	service.accessToken = accessToken
 }
 
 func (service Service) APIName() string {
