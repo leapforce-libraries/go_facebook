@@ -71,8 +71,6 @@ func (service *Service) GetIgUser(config *GetIgUserConfig) (*IgUser, *errortools
 		ResponseModel: &igUser,
 	}
 
-	fmt.Println(requestConfig.Url)
-
 	_, _, e := service.httpRequest(&requestConfig)
 	if e != nil {
 		return nil, e

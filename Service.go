@@ -20,8 +20,9 @@ const (
 // Service stores Service configuration
 //
 type Service struct {
-	accessToken string
-	httpService *go_http.Service
+	accessToken   string
+	httpService   *go_http.Service
+	errorResponse ErrorResponse
 }
 
 type ServiceConfig struct {
@@ -50,6 +51,10 @@ func NewService(serviceConfig *ServiceConfig) (*Service, *errortools.Error) {
 	}, nil
 }
 
+func (service *Service) Error() Error {
+	return service.errorResponse.Error
+}
+
 func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http.Request, *http.Response, *errortools.Error) {
 	// add authentication header
 	header := http.Header{}
@@ -57,15 +62,15 @@ func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http
 	(*requestConfig).NonDefaultHeaders = &header
 
 	// add error model
-	errorResponse := ErrorResponse{}
-	(*requestConfig).ErrorModel = &errorResponse
+	service.errorResponse = ErrorResponse{}
+	(*requestConfig).ErrorModel = &service.errorResponse
 
 	request, response, e := service.httpService.HttpRequest(requestConfig)
-	if errorResponse.Error.Message != "" {
-		e.SetMessage(errorResponse.Error.Message)
+	if service.errorResponse.Error.Message != "" {
+		e.SetMessage(service.errorResponse.Error.Message)
 	}
 
-	if errorResponse.Error.Code == errorCodeTooManyCalls {
+	if service.errorResponse.Error.Code == errorCodeTooManyCalls {
 		fmt.Println("Waiting another minute...")
 		time.Sleep(time.Minute)
 

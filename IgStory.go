@@ -10,7 +10,7 @@ import (
 	go_http "github.com/leapforce-libraries/go_http"
 )
 
-type IgUserStoryResponse struct {
+type IgStoryResponse struct {
 	Data    []IgMedia           `json:"data"`
 	Paging  Paging              `json:"paging"`
 	Summary PostCommentsSummary `json:"summary"`
@@ -44,15 +44,13 @@ func (service *Service) GetIgUserStories(config *GetIgUserStoriesConfig) (*[]IgM
 	igUserStories := []IgMedia{}
 
 	for {
-		response := IgUserStoryResponse{}
+		response := IgStoryResponse{}
 
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
 			Url:           url,
 			ResponseModel: &response,
 		}
-
-		fmt.Println(requestConfig.Url)
 
 		_, _, e := service.httpRequest(&requestConfig)
 		if e != nil {
