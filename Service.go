@@ -66,7 +66,13 @@ func (service *Service) httpRequest(requestConfig *go_http.RequestConfig) (*http
 	(*requestConfig).ErrorModel = &service.errorResponse
 
 	request, response, e := service.httpService.HttpRequest(requestConfig)
-	if service.errorResponse.Error.Message != "" {
+	if service.errorResponse.Error.ErrorUserMsg != "" {
+		if service.errorResponse.Error.ErrorUserTitle != "" {
+			e.SetMessagef("%s: %s", service.errorResponse.Error.ErrorUserTitle, service.errorResponse.Error.ErrorUserMsg)
+		} else {
+			e.SetMessage(service.errorResponse.Error.ErrorUserMsg)
+		}
+	} else if service.errorResponse.Error.Message != "" {
 		e.SetMessage(service.errorResponse.Error.Message)
 	}
 
