@@ -161,3 +161,83 @@ func (service *Service) GetIgMedia(config *GetIgMediaConfig) (*IgMedia, *errorto
 
 	return &igMedia, nil
 }
+
+type CreateIgMediaConfig struct {
+	IgUserId  string
+	Caption   *string
+	MediaType *string
+	Children  *[]string
+	ImageUrl  *string
+}
+
+func (service *Service) CreateIgMedia(config *CreateIgMediaConfig) (string, *errortools.Error) {
+	if config == nil {
+		return "", errortools.ErrorMessage("CreateIgMediaConfig must not be a nil pointer")
+	}
+
+	values := url.Values{}
+	if config.Caption != nil {
+		values.Set("caption", *config.Caption)
+	}
+	if config.MediaType != nil {
+		values.Set("media_type", *config.MediaType)
+	}
+	if config.Children != nil {
+		values.Set("children", strings.Join(*config.Children, ","))
+	}
+	if config.ImageUrl != nil {
+		values.Set("image_url", *config.ImageUrl)
+	}
+
+	url := service.url(fmt.Sprintf("%s/media?%s", config.IgUserId, values.Encode()))
+
+	var response struct {
+		Id string `json:"id"`
+	}
+
+	requestConfig := go_http.RequestConfig{
+		Method:        http.MethodPost,
+		Url:           url,
+		ResponseModel: &response,
+	}
+
+	_, _, e := service.httpRequest(&requestConfig)
+	if e != nil {
+		return "", e
+	}
+
+	return response.Id, nil
+}
+
+type PublishIgMediaConfig struct {
+	IgUserId   string
+	CreationId string
+}
+
+func (service *Service) PublishIgMedia(config *PublishIgMediaConfig) (string, *errortools.Error) {
+	if config == nil {
+		return "", errortools.ErrorMessage("PublishIgMediaConfig must not be a nil pointer")
+	}
+
+	values := url.Values{}
+	values.Set("creation_id", config.CreationId)
+
+	url := service.url(fmt.Sprintf("%s/media_publish?%s", config.IgUserId, values.Encode()))
+
+	var response struct {
+		Id string `json:"id"`
+	}
+
+	requestConfig := go_http.RequestConfig{
+		Method:        http.MethodPost,
+		Url:           url,
+		ResponseModel: &response,
+	}
+
+	_, _, e := service.httpRequest(&requestConfig)
+	if e != nil {
+		return "", e
+	}
+
+	return response.Id, nil
+}
