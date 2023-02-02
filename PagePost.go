@@ -15,8 +15,6 @@ type GetPagePostConfig struct {
 	Fields *[]PagePublishedPostField
 }
 
-// GetPagePosts returns Facebook post comments for a post
-//
 func (service *Service) GetPagePostRequest(config *GetPagePostConfig) (*go_http.RequestConfig, *PagePublishedPost, *errortools.Error) {
 	if config == nil {
 		return nil, nil, errortools.ErrorMessage("GetAccountsConfig must not be a nil pointer")
@@ -39,15 +37,13 @@ func (service *Service) GetPagePostRequest(config *GetPagePostConfig) (*go_http.
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		RelativeUrl:   relativeUrl,
-		Url:           service.url(relativeUrl),
+		Url:           service.urlV16(relativeUrl),
 		ResponseModel: &response,
 	}
 
 	return &requestConfig, &response, nil
 }
 
-// GetPagePosts returns Facebook post comments for a post
-//
 func (service *Service) GetPagePost(config *GetPagePostConfig) (*PagePublishedPost, *errortools.Error) {
 	requestConfig, response, e := service.GetPagePostRequest(config)
 	if e != nil {
@@ -59,4 +55,42 @@ func (service *Service) GetPagePost(config *GetPagePostConfig) (*PagePublishedPo
 	}
 
 	return response, nil
+}
+
+type CreatePagePostConfig struct {
+	PageId          string
+	Message         string
+	MediaIds        []string
+	PageAccessToken string
+}
+
+func (service *Service) CreatePagePost(config *CreatePagePostConfig) (string, *errortools.Error) {
+	if config == nil {
+		return "", errortools.ErrorMessage("CreatePagePostConfig must not be a nil pointer")
+	}
+
+	var values = url.Values{}
+	values.Set("access_token", config.PageAccessToken)
+	values.Set("message", config.Message)
+
+	for i, mediaId := range config.MediaIds {
+		values.Set(fmt.Sprintf("attached_media[%v]", i), fmt.Sprintf("{\"media_fbid\":\"%s\"}", mediaId))
+	}
+
+	var response struct {
+		Id string `json:"id"`
+	}
+
+	requestConfig := go_http.RequestConfig{
+		Method:        http.MethodPost,
+		Url:           service.url(fmt.Sprintf("%s/feed?%s", config.PageId, values.Encode())),
+		ResponseModel: &response,
+	}
+	fmt.Println(requestConfig.Url)
+	_, _, e := service.httpRequest(&requestConfig)
+	if e != nil {
+		return "", e
+	}
+
+	return response.Id, nil
 }

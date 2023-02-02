@@ -51,8 +51,6 @@ type GetPageConfig struct {
 	Fields *[]PageField
 }
 
-// GetPages returns Facebook post comments for a post
-//
 func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestConfig, *Page, *errortools.Error) {
 	if config == nil {
 		return nil, nil, errortools.ErrorMessage("GetPageConfig must not be a nil pointer")
@@ -75,15 +73,13 @@ func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestC
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		RelativeUrl:   relativeUrl,
-		Url:           service.url(relativeUrl),
+		Url:           service.urlV16(relativeUrl),
 		ResponseModel: &response,
 	}
 
 	return &requestConfig, &response, nil
 }
 
-// GetPages returns Facebook post comments for a post
-//
 func (service *Service) GetPage(config *GetPageConfig) (*Page, *errortools.Error) {
 	requestConfig, response, e := service.GetPageRequest(config)
 	if e != nil {

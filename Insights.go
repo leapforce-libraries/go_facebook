@@ -508,7 +508,7 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 
 	insights := []Insights{}
 
-	url := service.url(fmt.Sprintf("%v/insights?%s", config.Id, values.Encode()))
+	url := service.urlV16(fmt.Sprintf("%v/insights?%s", config.Id, values.Encode()))
 
 	for {
 		insightsResponse := InsightsResponse{}

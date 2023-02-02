@@ -160,7 +160,7 @@ func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *
 
 	creatives := []Creative{}
 
-	url := service.url(fmt.Sprintf("act_%v/adcreatives?%s", config.AccountId, values.Encode()))
+	url := service.urlV16(fmt.Sprintf("act_%v/adcreatives?%s", config.AccountId, values.Encode()))
 
 	for {
 		creativeResponse := CreativeResponse{}
@@ -214,7 +214,7 @@ func (service *Service) GetCreative(config *GetCreativeConfig) (*Creative, *erro
 
 	creative := Creative{}
 
-	url := service.url(fmt.Sprintf("%v?%s", config.CreativeId, values.Encode()))
+	url := service.urlV16(fmt.Sprintf("%v?%s", config.CreativeId, values.Encode()))
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		Url:           url,

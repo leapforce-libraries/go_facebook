@@ -10,7 +10,7 @@ type Attachment struct {
 	Target      AttachmentTarget     `json:"target"`
 	Title       string               `json:"title"`
 	Type        string               `json:"type"`
-	URL         string               `json:"url"`
+	URL         string               `json:"urlV16"`
 }
 
 type AttachmentMedia struct {
@@ -24,5 +24,5 @@ type AttachmentMediaImage struct {
 }
 
 type AttachmentTarget struct {
-	URL string `json:"url"`
+	URL string `json:"urlV16"`
 }
