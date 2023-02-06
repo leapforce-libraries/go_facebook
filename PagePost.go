@@ -86,7 +86,6 @@ func (service *Service) CreatePagePost(config *CreatePagePostConfig) (string, *e
 		Url:           service.url(fmt.Sprintf("%s/feed?%s", config.PageId, values.Encode())),
 		ResponseModel: &response,
 	}
-	fmt.Println(requestConfig.Url)
 	_, _, e := service.httpRequest(&requestConfig)
 	if e != nil {
 		return "", e
