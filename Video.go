@@ -13,7 +13,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"path/filepath"
 )
 
 type InitVideoUploadSessionConfig struct {
@@ -82,7 +81,7 @@ func (service *Service) UploadVideoChunk(config *UploadVideoChunkConfig) (*Uploa
 	_ = writer.WriteField("access_token", config.PageAccessToken)
 	_ = writer.WriteField("start_offset", fmt.Sprintf("%v", config.StartOffset))
 
-	part, _ := writer.CreateFormFile("video_file_chunk", filepath.Base(file.Name()))
+	part, _ := writer.CreateFormFile("video_file_chunk", file.Name())
 	io.Copy(part, file)
 	writer.Close()
 
