@@ -60,7 +60,8 @@ func (service *Service) GetPagePost(config *GetPagePostConfig) (*PagePublishedPo
 type CreatePagePostConfig struct {
 	PageId          string
 	Message         string
-	MediaIds        []string
+	Link            *string
+	MediaIds        *[]string
 	PageAccessToken string
 }
 
@@ -73,8 +74,14 @@ func (service *Service) CreatePagePost(config *CreatePagePostConfig) (string, *e
 	values.Set("access_token", config.PageAccessToken)
 	values.Set("message", config.Message)
 
-	for i, mediaId := range config.MediaIds {
-		values.Set(fmt.Sprintf("attached_media[%v]", i), fmt.Sprintf("{\"media_fbid\":\"%s\"}", mediaId))
+	if config.Link != nil {
+		values.Set("link", *config.Link)
+	}
+
+	if config.MediaIds != nil {
+		for i, mediaId := range *config.MediaIds {
+			values.Set(fmt.Sprintf("attached_media[%v]", i), fmt.Sprintf("{\"media_fbid\":\"%s\"}", mediaId))
+		}
 	}
 
 	var response struct {
