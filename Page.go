@@ -51,8 +51,9 @@ const (
 )
 
 type GetPageConfig struct {
-	PageId string
-	Fields *[]PageField
+	PageId          string
+	Fields          *[]PageField
+	PageAccessToken string
 }
 
 func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestConfig, *Page, *errortools.Error) {
@@ -71,6 +72,9 @@ func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestC
 		}
 	}
 	values.Set("fields", strings.Join(fields, ","))
+	if config.PageAccessToken != "" {
+		values.Set("access_token", config.PageAccessToken)
+	}
 
 	response := Page{}
 	relativeUrl := fmt.Sprintf("%s?%s", config.PageId, values.Encode())
