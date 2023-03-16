@@ -11,16 +11,19 @@ import (
 )
 
 type Page struct {
-	Id             string   `json:"id"`
-	AccessToken    string   `json:"access_token"`
-	Bio            string   `json:"bio"`
-	Category       string   `json:"category"`
-	Description    string   `json:"description"`
-	Emails         []string `json:"emails"`
-	FanCount       uint32   `json:"fan_count"`
-	FollowersCount uint32   `json:"followers_count"`
-	Name           string   `json:"name"`
-	Website        string   `json:"website"`
+	Id                       string   `json:"id"`
+	AccessToken              string   `json:"access_token"`
+	Bio                      string   `json:"bio"`
+	Category                 string   `json:"category"`
+	Description              string   `json:"description"`
+	Emails                   []string `json:"emails"`
+	FanCount                 uint32   `json:"fan_count"`
+	FollowersCount           uint32   `json:"followers_count"`
+	InstagramBusinessAccount *struct {
+		Id string `json:"id"`
+	} `json:"instagram_business_account"`
+	Name    string `json:"name"`
+	Website string `json:"website"`
 }
 
 type PageField string
