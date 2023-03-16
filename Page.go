@@ -36,14 +36,15 @@ const (
 	PageFieldAttire        PageField = "attire"
 	PageFieldAwards        PageField = "awards"
 	/*...*/
-	PageFieldBio            PageField = "bio"
-	PageFieldCategory       PageField = "category"
-	PageFieldDescription    PageField = "description"
-	PageFieldEmails         PageField = "emails"
-	PageFieldFanCount       PageField = "fan_count"
-	PageFieldFollowersCount PageField = "followers_count"
-	PageFieldName           PageField = "name"
-	PageFieldWebsite        PageField = "website"
+	PageFieldBio                      PageField = "bio"
+	PageFieldCategory                 PageField = "category"
+	PageFieldDescription              PageField = "description"
+	PageFieldEmails                   PageField = "emails"
+	PageFieldFanCount                 PageField = "fan_count"
+	PageFieldFollowersCount           PageField = "followers_count"
+	PageFieldInstagramBusinessAccount PageField = "instagram_business_account"
+	PageFieldName                     PageField = "name"
+	PageFieldWebsite                  PageField = "website"
 )
 
 type GetPageConfig struct {
