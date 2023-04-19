@@ -163,11 +163,13 @@ func (service *Service) GetIgMedia(config *GetIgMediaConfig) (*IgMedia, *errorto
 }
 
 type CreateIgMediaConfig struct {
-	IgUserId  string
-	Caption   *string
-	MediaType *string
-	Children  *[]string
-	ImageUrl  *string
+	IgUserId       string
+	Caption        *string
+	MediaType      *string
+	Children       *[]string
+	ImageUrl       *string
+	VideoUrl       *string
+	IsCarouselItem *bool
 }
 
 func (service *Service) CreateIgMedia(config *CreateIgMediaConfig) (string, *errortools.Error) {
@@ -187,6 +189,12 @@ func (service *Service) CreateIgMedia(config *CreateIgMediaConfig) (string, *err
 	}
 	if config.ImageUrl != nil {
 		values.Set("image_url", *config.ImageUrl)
+	}
+	if config.VideoUrl != nil {
+		values.Set("video_url", *config.VideoUrl)
+	}
+	if config.IsCarouselItem != nil {
+		values.Set("is_carousel_item ", fmt.Sprintf("%v", *config.IsCarouselItem))
 	}
 
 	url := service.urlV16(fmt.Sprintf("%s/media?%s", config.IgUserId, values.Encode()))

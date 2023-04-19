@@ -8,7 +8,6 @@ import (
 	go_http "github.com/leapforce-libraries/go_http"
 	go_types "github.com/leapforce-libraries/go_types"
 	"io"
-	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"net/url"
@@ -100,7 +99,7 @@ func (service *Service) UploadVideoChunk(config *UploadVideoChunkConfig) (*Uploa
 
 	var response UploadVideoChunkResponse
 
-	b, err := ioutil.ReadAll(re.Body)
+	b, err := io.ReadAll(re.Body)
 	if err != nil {
 		return nil, errortools.ErrorMessage(err)
 	}
