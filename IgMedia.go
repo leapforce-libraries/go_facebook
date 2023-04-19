@@ -227,6 +227,31 @@ func (service *Service) PublishIgMedia(config *PublishIgMediaConfig) (string, *e
 		return "", errortools.ErrorMessage("PublishIgMediaConfig must not be a nil pointer")
 	}
 
+	for {
+		container, e := service.GetIgContainer(&GetIgContainerConfig{
+			IgContainerId: config.CreationId,
+			Fields:        &[]IgContainerField{IgContainerFieldStatusCode},
+		})
+		if e != nil {
+			return "", e
+		}
+
+		if container.StatusCode == nil {
+			return "", errortools.ErrorMessage("GetIgContainer did not return status_code")
+		}
+
+		if *container.StatusCode == "FINISHED" {
+			break
+		}
+
+		if *container.StatusCode == "IN_PROGRESS" || *container.StatusCode == "PUBLISHED " {
+			time.Sleep(3 * time.Second)
+			continue
+		}
+
+		return "", errortools.ErrorMessagef("GetIgContainer returned status_code %s", *container.StatusCode)
+	}
+
 	values := url.Values{}
 	values.Set("creation_id", config.CreationId)
 
