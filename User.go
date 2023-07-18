@@ -50,3 +50,40 @@ func (service *Service) UserAccounts(userId string) (*[]UserAccount, *errortools
 
 	return &userAccounts, nil
 }
+
+type UserAdAccount struct {
+	Name string `json:"name"`
+	Id   string `json:"id"`
+}
+
+func (service *Service) UserAdAccounts(userId string) (*[]UserAdAccount, *errortools.Error) {
+
+	var userAccounts []UserAdAccount
+	url := service.urlV16(fmt.Sprintf("%s/adaccounts", userId))
+
+	for {
+		response := struct {
+			Data   []UserAdAccount `json:"data"`
+			Paging Paging          `json:"paging"`
+		}{}
+
+		requestConfig := go_http.RequestConfig{
+			Method:        http.MethodGet,
+			Url:           url,
+			ResponseModel: &response,
+		}
+		_, _, e := service.httpRequest(&requestConfig)
+		if e != nil {
+			return nil, e
+		}
+
+		userAccounts = append(userAccounts, response.Data...)
+
+		url = response.Paging.Next
+		if url == "" {
+			break
+		}
+	}
+
+	return &userAccounts, nil
+}
