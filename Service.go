@@ -13,14 +13,13 @@ import (
 
 const (
 	apiName               string = "facebook"
-	apiUrlV16             string = "https://graph.facebook.com/v16.0"
+	apiUrlV16             string = "https://graph.facebook.com/v18.0"
 	apiUrl                string = "https://graph.facebook.com"
 	apiUrlWww             string = "https://www.facebook.com/v15.0"
 	errorCodeTooManyCalls int    = 80004
 )
 
 // Service stores Service configuration
-//
 type Service struct {
 	accessToken   string
 	httpService   *go_http.Service
@@ -32,7 +31,6 @@ type ServiceConfig struct {
 }
 
 // methods
-//
 func NewService(serviceConfig *ServiceConfig) (*Service, *errortools.Error) {
 	if serviceConfig == nil {
 		return nil, errortools.ErrorMessage("ServiceConfig must not be a nil pointer")
