@@ -123,7 +123,7 @@ func (service *Service) GetCampaigns(config *GetCampaignsConfig) (*[]Campaign, *
 
 	campaigns := []Campaign{}
 
-	url := service.urlV16(fmt.Sprintf("act_%v/campaigns?%s", config.AccountID, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("act_%v/campaigns?%s", config.AccountID, values.Encode()))
 
 	for {
 		campaignResponse := CampaignResponse{}

@@ -102,7 +102,7 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 
 	var insights []Insights
 
-	url_ := service.urlV16(fmt.Sprintf("%s/insights?%s", config.Id, values.Encode()))
+	url_ := service.urlV18(fmt.Sprintf("%s/insights?%s", config.Id, values.Encode()))
 
 	for {
 		insightsResponse := InsightsResponse{}

@@ -22,7 +22,7 @@ type UserAccount struct {
 func (service *Service) UserAccounts(userId string) (*[]UserAccount, *errortools.Error) {
 
 	var userAccounts []UserAccount
-	url := service.urlV16(fmt.Sprintf("%s/accounts", userId))
+	url := service.urlV18(fmt.Sprintf("%s/accounts", userId))
 
 	for {
 		response := struct {
@@ -59,7 +59,7 @@ type UserAdAccount struct {
 func (service *Service) UserAdAccounts(userId string) (*[]UserAdAccount, *errortools.Error) {
 
 	var userAccounts []UserAdAccount
-	url := service.urlV16(fmt.Sprintf("%s/adaccounts?fields=name", userId))
+	url := service.urlV18(fmt.Sprintf("%s/adaccounts?fields=name", userId))
 
 	for {
 		response := struct {

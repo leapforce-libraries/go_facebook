@@ -81,7 +81,7 @@ func (service *Service) GetPageRequest(config *GetPageConfig) (*go_http.RequestC
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		RelativeUrl:   relativeUrl,
-		Url:           service.urlV16(relativeUrl),
+		Url:           service.urlV18(relativeUrl),
 		ResponseModel: &response,
 	}
 

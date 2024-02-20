@@ -91,7 +91,7 @@ func (service *Service) GetIgMedias(config *GetIgMediasConfig) (*[]IgMedia, *err
 		values.Set("until", fmt.Sprintf("%v", config.Until.Unix()))
 	}
 
-	url := service.urlV16(fmt.Sprintf("%s/media?%s", config.IgUserId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s/media?%s", config.IgUserId, values.Encode()))
 
 	igMedias := []IgMedia{}
 
@@ -144,7 +144,7 @@ func (service *Service) GetIgMedia(config *GetIgMediaConfig) (*IgMedia, *errorto
 	}
 	values.Set("fields", strings.Join(fields, ","))
 
-	url := service.urlV16(fmt.Sprintf("%s?%s", config.IgMediaId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s?%s", config.IgMediaId, values.Encode()))
 
 	igMedia := IgMedia{}
 
@@ -197,7 +197,7 @@ func (service *Service) CreateIgMedia(config *CreateIgMediaConfig) (string, *err
 		values.Set("is_carousel_item ", fmt.Sprintf("%v", *config.IsCarouselItem))
 	}
 
-	url := service.urlV16(fmt.Sprintf("%s/media?%s", config.IgUserId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s/media?%s", config.IgUserId, values.Encode()))
 
 	var response struct {
 		Id string `json:"id"`
@@ -255,7 +255,7 @@ func (service *Service) PublishIgMedia(config *PublishIgMediaConfig) (string, *e
 	values := url.Values{}
 	values.Set("creation_id", config.CreationId)
 
-	url := service.urlV16(fmt.Sprintf("%s/media_publish?%s", config.IgUserId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s/media_publish?%s", config.IgUserId, values.Encode()))
 
 	var response struct {
 		Id string `json:"id"`

@@ -46,7 +46,7 @@ func (service *Service) GetIgContainer(config *GetIgContainerConfig) (*IgContain
 	}
 	values.Set("fields", strings.Join(fields, ","))
 
-	url := service.urlV16(fmt.Sprintf("%s?%s", config.IgContainerId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s?%s", config.IgContainerId, values.Encode()))
 
 	igContainer := IgContainer{}
 

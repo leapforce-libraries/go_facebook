@@ -65,7 +65,6 @@ type GetPagePublishedPostsConfig struct {
 }
 
 // GetPagePublishedPosts returns Facebook post comments for a post
-//
 func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPostsConfig) (*go_http.RequestConfig, *PagePublishedPostsResponse, *errortools.Error) {
 	if config == nil {
 		return nil, nil, errortools.ErrorMessage("GetAccountsConfig must not be a nil pointer")
@@ -99,7 +98,7 @@ func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPos
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		RelativeUrl:   relativeUrl,
-		Url:           service.urlV16(relativeUrl),
+		Url:           service.urlV18(relativeUrl),
 		ResponseModel: &response,
 	}
 
@@ -107,7 +106,6 @@ func (service *Service) GetPagePublishedPostsRequest(config *GetPagePublishedPos
 }
 
 // GetPagePublishedPosts returns Facebook post comments for a post
-//
 func (service *Service) GetPagePublishedPosts(config *GetPagePublishedPostsConfig) (*PagePublishedPostsResponse, *errortools.Error) {
 	requestConfig, response, e := service.GetPagePublishedPostsRequest(config)
 	if e != nil {

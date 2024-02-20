@@ -45,7 +45,6 @@ type GetPostCommentsConfig struct {
 }
 
 // GetPostComments returns Facebook post comments for a post
-//
 func (service *Service) GetPostCommentsRequest(config *GetPostCommentsConfig) (*go_http.RequestConfig, *PostCommentsResponse, *errortools.Error) {
 	if config == nil {
 		return nil, nil, errortools.ErrorMessage("GetAccountsConfig must not be a nil pointer")
@@ -70,7 +69,7 @@ func (service *Service) GetPostCommentsRequest(config *GetPostCommentsConfig) (*
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		RelativeUrl:   relativeUrl,
-		Url:           service.urlV16(relativeUrl),
+		Url:           service.urlV18(relativeUrl),
 		ResponseModel: &response,
 	}
 
@@ -78,7 +77,6 @@ func (service *Service) GetPostCommentsRequest(config *GetPostCommentsConfig) (*
 }
 
 // GetPostComments returns Facebook post comments for a post
-//
 func (service *Service) GetPostComments(config *GetPostCommentsConfig) (*PostCommentsResponse, *errortools.Error) {
 	requestConfig, response, e := service.GetPostCommentsRequest(config)
 	if e != nil {

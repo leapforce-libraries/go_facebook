@@ -114,23 +114,3 @@ type InspectedToken struct {
 		UserId string `json:"user_id"`
 	} `json:"data"`
 }
-
-func (service *OAuthService) InspectToken(appToken string, accessToken string) (*InspectedToken, *errortools.Error) {
-	values := url.Values{}
-	values.Set("input_token", accessToken)
-	values.Set("access_token", appToken)
-
-	var inspectedToken InspectedToken
-
-	requestConfig := go_http.RequestConfig{
-		Method:        http.MethodGet,
-		Url:           fmt.Sprintf("https://graph.facebook.com/debug_token?%s", values.Encode()),
-		ResponseModel: &inspectedToken,
-	}
-	_, _, e := service.httpService.HttpRequest(&requestConfig)
-	if e != nil {
-		return nil, e
-	}
-
-	return &inspectedToken, nil
-}

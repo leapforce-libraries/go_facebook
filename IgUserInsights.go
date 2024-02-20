@@ -87,7 +87,7 @@ func (service *Service) GetIgUserInsights(config *GetIgUserInsightsConfig) (*[]I
 	values.Set("since", fmt.Sprintf("%v", config.Since.Unix()))
 	values.Set("until", fmt.Sprintf("%v", config.Until.Unix()))
 
-	url := service.urlV16(fmt.Sprintf("%s/insights?%s", config.UserId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s/insights?%s", config.UserId, values.Encode()))
 
 	insights := []IgUserInsight{}
 

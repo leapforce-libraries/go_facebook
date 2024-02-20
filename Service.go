@@ -118,7 +118,7 @@ func (service *Service) url(path string) string {
 	return fmt.Sprintf("%s/%s", apiUrl, path)
 }
 
-func (service *Service) urlV16(path string) string {
+func (service *Service) urlV18(path string) string {
 	return fmt.Sprintf("%s/%s", apiUrlV18, path)
 }
 

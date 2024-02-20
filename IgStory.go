@@ -39,7 +39,7 @@ func (service *Service) GetIgUserStories(config *GetIgUserStoriesConfig) (*[]IgM
 	}
 	values.Set("fields", strings.Join(fields, ","))
 
-	url := service.urlV16(fmt.Sprintf("%s/stories?%s", config.IgUserId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("%s/stories?%s", config.IgUserId, values.Encode()))
 
 	igUserStories := []IgMedia{}
 

@@ -100,7 +100,7 @@ func (service *Service) GetCustomConversions(config *GetCustomConversionsConfig)
 
 	customConversions := []CustomConversion{}
 
-	url := service.urlV16(fmt.Sprintf("act_%v/customconversions?%s", config.AccountId, values.Encode()))
+	url := service.urlV18(fmt.Sprintf("act_%v/customconversions?%s", config.AccountId, values.Encode()))
 
 	for {
 		customConversionResponse := CustomConversionResponse{}
