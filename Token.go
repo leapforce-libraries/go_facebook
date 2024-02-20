@@ -19,7 +19,7 @@ func (service *Service) InspectToken(accessToken string) (*InspectedToken, *erro
 		Url:           service.urlV18(fmt.Sprintf("debug_token?%s", values.Encode())),
 		ResponseModel: &inspectedToken,
 	}
-	_, _, e := service.httpService.HttpRequest(&requestConfig)
+	_, _, e := service.httpRequest(&requestConfig)
 	if e != nil {
 		return nil, e
 	}
