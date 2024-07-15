@@ -47,7 +47,7 @@ func (service *Service) CreateComment(config *CreateCommentConfig) (string, *err
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodPost,
-		Url:           service.urlV18(fmt.Sprintf("%s/comments?%s", config.ObjectId, values.Encode())),
+		Url:           service.urlV20(fmt.Sprintf("%s/comments?%s", config.ObjectId, values.Encode())),
 		ResponseModel: &response,
 	}
 	_, _, e := service.httpRequest(&requestConfig)

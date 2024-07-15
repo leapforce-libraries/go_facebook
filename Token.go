@@ -16,7 +16,7 @@ func (service *Service) InspectToken(accessToken string) (*InspectedToken, *erro
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		Url:           service.urlV18(fmt.Sprintf("debug_token?%s", values.Encode())),
+		Url:           service.urlV20(fmt.Sprintf("debug_token?%s", values.Encode())),
 		ResponseModel: &inspectedToken,
 	}
 	_, _, e := service.httpRequest(&requestConfig)

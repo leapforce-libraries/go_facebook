@@ -41,7 +41,7 @@ func (service *Service) InitVideoUploadSession(config *InitVideoUploadSessionCon
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodPost,
-		Url:           service.urlV18(fmt.Sprintf("%s/videos?%s", config.PageId, values.Encode())),
+		Url:           service.urlV20(fmt.Sprintf("%s/videos?%s", config.PageId, values.Encode())),
 		ResponseModel: &response,
 	}
 	_, _, e := service.httpRequest(&requestConfig)
@@ -84,7 +84,7 @@ func (service *Service) UploadVideoChunk(config *UploadVideoChunkConfig) (*Uploa
 	io.Copy(part, file)
 	writer.Close()
 
-	r, err := http.NewRequest("POST", service.urlV18(fmt.Sprintf("%s/videos", config.PageId)), body)
+	r, err := http.NewRequest("POST", service.urlV20(fmt.Sprintf("%s/videos", config.PageId)), body)
 	if err != nil {
 		return nil, errortools.ErrorMessage(err)
 	}
@@ -148,7 +148,7 @@ func (service *Service) EndVideoUploadSession(config *EndVideoUploadSessionConfi
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodPost,
-		Url:           service.urlV18(fmt.Sprintf("%s/videos?%s", config.PageId, values.Encode())),
+		Url:           service.urlV20(fmt.Sprintf("%s/videos?%s", config.PageId, values.Encode())),
 		ResponseModel: &response,
 	}
 	_, _, e := service.httpRequest(&requestConfig)

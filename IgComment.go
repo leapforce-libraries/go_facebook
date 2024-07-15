@@ -27,7 +27,7 @@ func (service *Service) CreateIgComment(config *CreateIgCommentConfig) (string, 
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodPost,
-		Url:           service.urlV18(fmt.Sprintf("%s/comments?%s", config.MediaId, values.Encode())),
+		Url:           service.urlV20(fmt.Sprintf("%s/comments?%s", config.MediaId, values.Encode())),
 		ResponseModel: &response,
 	}
 	_, _, e := service.httpRequest(&requestConfig)

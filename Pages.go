@@ -46,7 +46,7 @@ func (service *Service) GetPages(config *GetPagesConfig) (*[]ManagePage, *errort
 
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
-			Url:           service.urlV18(fmt.Sprintf("%s/accounts?%s", config.UserId, values.Encode())),
+			Url:           service.urlV20(fmt.Sprintf("%s/accounts?%s", config.UserId, values.Encode())),
 			ResponseModel: &response,
 		}
 		_, _, e := service.httpRequest(&requestConfig)

@@ -61,7 +61,7 @@ func (service *Service) GetIgUser(config *GetIgUserConfig) (*IgUser, *errortools
 	}
 	values.Set("fields", strings.Join(fields, ","))
 
-	url := service.urlV18(fmt.Sprintf("%s?%s", config.IgUserId, values.Encode()))
+	url := service.urlV20(fmt.Sprintf("%s?%s", config.IgUserId, values.Encode()))
 
 	igUser := IgUser{}
 

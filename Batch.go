@@ -82,11 +82,11 @@ func (service *Service) Batch(config *BatchConfig) (*[]BatchResponse, *errortool
 		return nil, errortools.ErrorMessage(err)
 	}
 
-	//values := urlV18.Values{}
+	//values := urlV20.Values{}
 	values := []string{
 		fmt.Sprintf("batch=%s", string(b)),
 		fmt.Sprintf("access_token=%s", config.AccessToken),
-	} // we do not use urlV18.Values since the "batch" param should not be encoded
+	} // we do not use urlV20.Values since the "batch" param should not be encoded
 	if config.IncludeHeaders != nil {
 		values = append(values, fmt.Sprintf("include_headers=%v", *config.IncludeHeaders))
 	}

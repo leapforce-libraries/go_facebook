@@ -164,7 +164,7 @@ func (service *Service) GetAccount(config *GetAccountConfig) (*Account, *errorto
 	account := Account{}
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		Url:           service.urlV18(fmt.Sprintf("act_%v?%s", config.AccountId, values.Encode())),
+		Url:           service.urlV20(fmt.Sprintf("act_%v?%s", config.AccountId, values.Encode())),
 		ResponseModel: &account,
 	}
 	_, _, e := service.httpRequest(&requestConfig)

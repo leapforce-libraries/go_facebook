@@ -66,7 +66,7 @@ func (service *Service) GetIgMediaInsights(config *GetIgMediaInsightsConfig) (*[
 	}
 	values.Set("metric", strings.Join(metrics, ","))
 
-	url := service.urlV18(fmt.Sprintf("%s/insights?%s", config.MediaId, values.Encode()))
+	url := service.urlV20(fmt.Sprintf("%s/insights?%s", config.MediaId, values.Encode()))
 
 	insights := []IgMediaInsight{}
 

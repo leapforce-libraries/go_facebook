@@ -152,10 +152,11 @@ func (service *Service) GetAdSets(config *GetAdSetsConfig) (*[]AdSet, *errortool
 		}
 	}
 	values.Set("fields", strings.Join(fields, ","))
+	values.Set("limit", "100")
 
 	adSets := []AdSet{}
 
-	url := service.urlV18(fmt.Sprintf("act_%v/adsets?%s", config.AccountID, values.Encode()))
+	url := service.urlV20(fmt.Sprintf("act_%v/adsets?%s", config.AccountID, values.Encode()))
 
 	for {
 		adSetResponse := AdSetResponse{}

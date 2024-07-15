@@ -63,7 +63,7 @@ func (service *Service) GetLeads(config *GetLeadsConfig) (*[]Lead, *errortools.E
 
 	leads := []Lead{}
 
-	url := service.urlV18(fmt.Sprintf("%v/leads?%s", config.AdId, values.Encode()))
+	url := service.urlV20(fmt.Sprintf("%v/leads?%s", config.AdId, values.Encode()))
 
 	for {
 		leadResponse := LeadResponse{}

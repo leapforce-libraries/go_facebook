@@ -37,7 +37,7 @@ func (service *Service) GetPagePostRequest(config *GetPagePostConfig) (*go_http.
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
 		RelativeUrl:   relativeUrl,
-		Url:           service.urlV18(relativeUrl),
+		Url:           service.urlV20(relativeUrl),
 		ResponseModel: &response,
 	}
 

@@ -65,7 +65,7 @@ func (service *OAuthService) TokenFromCode(code string) (*Token, *errortools.Err
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		Url:           fmt.Sprintf("%s/oauth/access_token?%s", apiUrlV18, values.Encode()),
+		Url:           fmt.Sprintf("%s/oauth/access_token?%s", apiUrlV20, values.Encode()),
 		ResponseModel: &token,
 	}
 	_, _, e := service.httpService.HttpRequest(&requestConfig)
@@ -87,7 +87,7 @@ func (service *OAuthService) ExchangeToken(accessToken string) (*Token, *errorto
 
 	requestConfig := go_http.RequestConfig{
 		Method:        http.MethodGet,
-		Url:           fmt.Sprintf("%s/oauth/access_token?%s", apiUrlV18, values.Encode()),
+		Url:           fmt.Sprintf("%s/oauth/access_token?%s", apiUrlV20, values.Encode()),
 		ResponseModel: &token,
 	}
 	_, _, e := service.httpService.HttpRequest(&requestConfig)
