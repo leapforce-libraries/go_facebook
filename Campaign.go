@@ -103,6 +103,7 @@ const (
 type GetCampaignsConfig struct {
 	AccountID int64
 	Fields    []CampaignField
+	Limit     *uint64
 }
 
 func (service *Service) GetCampaigns(config *GetCampaignsConfig) (*[]Campaign, *errortools.Error) {
@@ -120,6 +121,12 @@ func (service *Service) GetCampaigns(config *GetCampaignsConfig) (*[]Campaign, *
 		}
 	}
 	values.Set("fields", strings.Join(fields, ","))
+
+	limit := limitDefault
+	if config.Limit != nil {
+		limit = *config.Limit
+	}
+	values.Set("limit", fmt.Sprintf("%v", limit))
 
 	campaigns := []Campaign{}
 

@@ -79,6 +79,7 @@ type GetAdsConfig struct {
 	AccountID int64
 	Since     *time.Time
 	Fields    []AdField
+	Limit     *uint64
 }
 
 func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) {
@@ -97,6 +98,12 @@ func (service *Service) GetAds(config *GetAdsConfig) (*[]Ad, *errortools.Error) 
 		}
 	}
 	values.Set("fields", strings.Join(fields, ","))
+
+	limit := limitDefault
+	if config.Limit != nil {
+		limit = *config.Limit
+	}
+	values.Set("limit", fmt.Sprintf("%v", limit))
 
 	ads := []Ad{}
 

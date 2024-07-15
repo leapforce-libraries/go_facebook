@@ -140,6 +140,7 @@ const (
 type GetCreativesConfig struct {
 	AccountId int64
 	Fields    []CreativeField
+	Limit     *uint64
 }
 
 func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *errortools.Error) {
@@ -157,6 +158,12 @@ func (service *Service) GetCreatives(config *GetCreativesConfig) (*[]Creative, *
 		}
 	}
 	values.Set("fields", strings.Join(fields, ","))
+
+	limit := limitDefault
+	if config.Limit != nil {
+		limit = *config.Limit
+	}
+	values.Set("limit", fmt.Sprintf("%v", limit))
 
 	creatives := []Creative{}
 

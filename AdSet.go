@@ -135,6 +135,7 @@ const (
 type GetAdSetsConfig struct {
 	AccountID int64
 	Fields    []AdSetField
+	Limit     *uint64
 }
 
 func (service *Service) GetAdSets(config *GetAdSetsConfig) (*[]AdSet, *errortools.Error) {
@@ -152,7 +153,12 @@ func (service *Service) GetAdSets(config *GetAdSetsConfig) (*[]AdSet, *errortool
 		}
 	}
 	values.Set("fields", strings.Join(fields, ","))
-	values.Set("limit", "100")
+
+	limit := limitDefault
+	if config.Limit != nil {
+		limit = *config.Limit
+	}
+	values.Set("limit", fmt.Sprintf("%v", limit))
 
 	adSets := []AdSet{}
 

@@ -17,6 +17,7 @@ const (
 	apiUrl                string = "https://graph.facebook.com"
 	apiUrlWww             string = "https://www.facebook.com/v15.0"
 	errorCodeTooManyCalls int    = 80004
+	limitDefault          uint64 = 100
 )
 
 // Service stores Service configuration
