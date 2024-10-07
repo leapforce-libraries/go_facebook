@@ -1,6 +1,5 @@
 package facebook
 
-/*
 import (
 	"fmt"
 	"net/http"
@@ -12,12 +11,12 @@ import (
 	go_http "github.com/leapforce-libraries/go_http"
 )
 
-type InsightsResponse struct {
-	Data   []Insights `json:"data"`
-	Paging *Paging    `json:"paging"`
+type Insight2sResponse struct {
+	Data   []Insight2s `json:"data"`
+	Paging *Paging     `json:"paging"`
 }
 
-type Insights struct {
+type Insight2s struct {
 	Name   string `json:"name"`
 	Period string `json:"period"`
 	Values []struct {
@@ -30,30 +29,6 @@ type Insights struct {
 	Id                    string  `json:"id"`
 }
 
-type DatePreset string
-
-const (
-	DatePresetToday            DatePreset = "today"
-	DatePresetYesterday        DatePreset = "yesterday"
-	DatePresetThisMonth        DatePreset = "this_month"
-	DatePresetLastMonth        DatePreset = "last_month"
-	DatePresetThisQuarter      DatePreset = "this_quarter"
-	DatePresetMaximum          DatePreset = "maximum"
-	DatePresetLast3Days        DatePreset = "last_3d"
-	DatePresetLast7Days        DatePreset = "last_7d"
-	DatePresetLast14Days       DatePreset = "last_14d"
-	DatePresetLast28Days       DatePreset = "last_28d"
-	DatePresetLast30Days       DatePreset = "last_30d"
-	DatePresetLast90Days       DatePreset = "last_90d"
-	DatePresetLastWeekMonSun   DatePreset = "last_week_mon_sun"
-	DatePresetLastWeekSunSat   DatePreset = "last_week_sun_sat"
-	DatePresetLastQuarter      DatePreset = "last_quarter"
-	DatePresetLastYear         DatePreset = "last_year"
-	DatePresetThisWeekMonToday DatePreset = "this_week_mon_today"
-	DatePresetThisWeekSunToday DatePreset = "this_week_sun_today"
-	DatePresetThisYear         DatePreset = "this_year"
-)
-
 type Period string
 
 const (
@@ -65,7 +40,7 @@ const (
 	PeriodTotalOverRange Period = "total_over_range"
 )
 
-type GetInsightsConfig struct {
+type GetInsight2sConfig struct {
 	Id                        string
 	DatePreset                *DatePreset
 	Metrics                   []string
@@ -75,9 +50,9 @@ type GetInsightsConfig struct {
 	Until                     *time.Time
 }
 
-func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *errortools.Error) {
+func (service *Service) GetInsight2s(config *GetInsight2sConfig) (*[]Insight2s, *errortools.Error) {
 	if config == nil {
-		return nil, errortools.ErrorMessage("GetInsightsConfig must not be a nil pointer")
+		return nil, errortools.ErrorMessage("GetInsight2sConfig must not be a nil pointer")
 	}
 
 	values := url.Values{}
@@ -101,35 +76,34 @@ func (service *Service) GetInsights(config *GetInsightsConfig) (*[]Insights, *er
 		values.Set("until", fmt.Sprintf("%v", config.Until.Unix()))
 	}
 
-	var insights []Insights
+	var insight2s []Insight2s
 
 	url_ := service.urlV20(fmt.Sprintf("%s/insights?%s", config.Id, values.Encode()))
 
 	for {
-		insightsResponse := InsightsResponse{}
+		insight2sResponse := Insight2sResponse{}
 		requestConfig := go_http.RequestConfig{
 			Method:        http.MethodGet,
 			Url:           url_,
-			ResponseModel: &insightsResponse,
+			ResponseModel: &insight2sResponse,
 		}
 		_, _, e := service.httpRequest(&requestConfig)
 		if e != nil {
 			return nil, e
 		}
 
-		insights = append(insights, insightsResponse.Data...)
+		insight2s = append(insight2s, insight2sResponse.Data...)
 
-		if insightsResponse.Paging == nil {
+		if insight2sResponse.Paging == nil {
 			break
 		}
 
-		if insightsResponse.Paging.Next == "" {
+		if insight2sResponse.Paging.Next == "" {
 			break
 		}
 
-		url_ = insightsResponse.Paging.Next
+		url_ = insight2sResponse.Paging.Next
 	}
 
-	return &insights, nil
+	return &insight2s, nil
 }
-*/

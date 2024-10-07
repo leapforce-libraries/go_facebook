@@ -13,9 +13,9 @@ import (
 
 const (
 	apiName               string = "facebook"
-	apiUrlV20             string = "https://graph.facebook.com/v20.0"
+	apiUrlV21             string = "https://graph.facebook.com/v21.0"
 	apiUrl                string = "https://graph.facebook.com"
-	apiUrlWww             string = "https://www.facebook.com/v15.0"
+	apiUrlWww             string = "https://www.facebook.com/v21.0"
 	errorCodeTooManyCalls int    = 80004
 	limitDefault          uint64 = 100
 )
@@ -120,7 +120,7 @@ func (service *Service) url(path string) string {
 }
 
 func (service *Service) urlV20(path string) string {
-	return fmt.Sprintf("%s/%s", apiUrlV20, path)
+	return fmt.Sprintf("%s/%s", apiUrlV21, path)
 }
 
 func (service *Service) AccessToken(accessToken string) {
